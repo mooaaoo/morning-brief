@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>全球市场晨报</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f5f2ed;
+      color: #1a1a2e;
+      font-size: 14px;
+      line-height: 1.6;
+      padding: 20px 12px;
+    }
+    .container { max-width: 920px; margin: 0 auto; }
+    .global-header {
+      text-align: center;
+      padding: 16px 0 24px;
+      border-bottom: 2px solid #d35400;
+      margin-bottom: 24px;
+    }
+    .global-header h1 { font-size: 24px; color: #1a1a2e; letter-spacing: 2px; }
+    .global-header .subtitle { font-size: 12px; color: #888; margin-top: 6px; }
+    article.daily-brief {
+      background: #fff;
+      border-radius: 10px;
+      padding: 28px 32px;
+      margin-bottom: 28px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid #e8e2d6;
+    }
+    .brief-header { border-left: 5px solid #d35400; padding-left: 14px; margin-bottom: 22px; }
+    .brief-header .date { font-size: 22px; font-weight: 700; color: #1a1a2e; }
+    .brief-header .weekday { font-size: 13px; color: #888; margin-left: 8px; }
+    .brief-header .meta { font-size: 11px; color: #aaa; margin-top: 4px; }
+    section.module { margin-bottom: 26px; }
+    section.module > h2 { font-size: 16px; color: #1a1a2e; padding-bottom: 8px; border-bottom: 1px solid #eee; margin-bottom: 12px; }
+    .module-comment { font-size: 12px; color: #666; font-style: italic; margin-bottom: 10px; }
+    .placeholder-box {
+      padding: 30px 20px;
+      background: #faf6ef;
+      border: 1px dashed #d35400;
+      border-radius: 8px;
+      text-align: center;
+      color: #555;
+    }
+    .placeholder-box .big { font-size: 18px; color: #d35400; margin-bottom: 8px; }
+    .placeholder-box .small { font-size: 12px; color: #888; }
+    #auth-gate {
+      position: fixed; inset: 0;
+      background: #f5f2ed;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999;
+    }
+    #auth-gate .auth-card {
+      background: #fff;
+      border: 1px solid #e8e2d6;
+      border-radius: 10px;
+      padding: 28px 32px;
+      width: 320px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    #auth-gate h2 { font-size: 18px; color: #1a1a2e; margin-bottom: 6px; }
+    #auth-gate p { font-size: 12px; color: #888; margin-bottom: 16px; }
+    #auth-gate input {
+      width: 100%; padding: 10px 12px;
+      border: 1px solid #ddd; border-radius: 6px;
+      font-size: 14px; margin-bottom: 10px;
+      text-align: center; letter-spacing: 2px;
+    }
+    #auth-gate input:focus { outline: none; border-color: #d35400; }
+    #auth-gate button {
+      width: 100%; padding: 10px;
+      background: #d35400; color: #fff;
+      border: none; border-radius: 6px;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+    }
+    #auth-gate button:hover { background: #b8541a; }
+    #auth-gate .auth-error { color: #d44; font-size: 12px; margin-top: 8px; min-height: 16px; }
+    body.authed #auth-gate { display: none; }
+    body:not(.authed) .container { display: none; }
+    .week-nav {
+      background: #fdf6ec;
+      border: 1px solid #e8d5b5;
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-bottom: 20px;
+      font-size: 12.5px;
+    }
+    .week-nav .nav-title { font-weight: 600; color: #b8541a; margin-bottom: 6px; }
+    .week-nav .nav-links { display: flex; flex-wrap: wrap; gap: 6px; }
+    .week-nav .nav-links a {
+      display: inline-block; padding: 3px 10px;
+      background: #fff; border: 1px solid #e8d5b5;
+      border-radius: 12px; color: #555;
+      text-decoration: none; font-size: 11.5px;
+    }
+    .week-nav .nav-links a.today {
+      background: #d35400; color: #fff;
+      border-color: #d35400; font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div id="auth-gate">
+    <div class="auth-card">
+      <h2>📊 全球市场晨报</h2>
+      <p>请输入访问密码</p>
+      <input type="password" id="auth-pwd" placeholder="密码" autocomplete="current-password">
+      <button id="auth-btn">查看晨报</button>
+      <div class="auth-error" id="auth-err"></div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var PWD_HASH = "b5e8e046555796c3a7e71f0d32ae33029f14888b8797e5d5b5d62ae730184fbb";
+      var SESSION_KEY = "mb_authed_at";
+
+      async function sha256(s) {
+        var buf = new TextEncoder().encode(s);
+        var hash = await crypto.subtle.digest("SHA-256", buf);
+        return Array.from(new Uint8Array(hash))
+          .map(function(b) { return b.toString(16).padStart(2, "0"); })
+          .join("");
+      }
+      function isAuthedToday() {
+        var v = sessionStorage.getItem(SESSION_KEY);
+        if (!v) return false;
+        return v === new Date().toISOString().slice(0, 10);
+      }
+      function markAuthed() {
+        sessionStorage.setItem(SESSION_KEY, new Date().toISOString().slice(0, 10));
+      }
+      function showContent() {
+        document.body.classList.add("authed");
+        buildWeekNav();
+      }
+      function buildWeekNav() {
+        var nav = document.getElementById("week-nav");
+        if (!nav) return;
+        var articles = document.querySelectorAll("article.daily-brief");
+        var links = [];
+        var seen = {};
+        articles.forEach(function(a, i) {
+          var dateEl = a.querySelector(".brief-header .date");
+          if (!dateEl) return;
+          var date = dateEl.textContent.trim();
+          if (seen[date]) return;
+          seen[date] = true;
+          var id = "brief-" + date;
+          a.id = id;
+          var isToday = (i === 0);
+          links.push("<a href=\"#" + id + "\"" + (isToday ? " class=\"today\"" : "") + ">" + date + (isToday ? " · 今日" : "") + "</a>");
+        });
+        nav.querySelector(".nav-links").innerHTML = links.join("") || "<span style=\"color:#888;\">暂无历史</span>";
+      }
+      async function tryAuth() {
+        var input = document.getElementById("auth-pwd").value;
+        var errEl = document.getElementById("auth-err");
+        errEl.textContent = "";
+        if (!input) { errEl.textContent = "请输入密码"; return; }
+        var hash = await sha256(input);
+        if (hash === PWD_HASH) {
+          markAuthed();
+          showContent();
+        } else {
+          errEl.textContent = "密码错误，请重试";
+          document.getElementById("auth-pwd").value = "";
+        }
+      }
+      document.addEventListener("DOMContentLoaded", function() {
+        if (isAuthedToday()) { showContent(); return; }
+        document.getElementById("auth-btn").addEventListener("click", tryAuth);
+        document.getElementById("auth-pwd").addEventListener("keydown", function(e) {
+          if (e.key === "Enter") tryAuth();
+        });
+        document.getElementById("auth-pwd").focus();
+      });
+    })();
+  </script>
+
+  <div class="container">
+    <div class="global-header">
+      <h1>📊 全球市场晨报</h1>
+      <div class="subtitle">A股宽基六维 + 15全球权益指数 · 投研搜索Skill 生成 · 每日 08:00 自动更新 · GitHub Pages 发布</div>
+    </div>
+
+    <div class="week-nav" id="week-nav">
+      <div class="nav-title">📅 过往一周晨报</div>
+      <div class="nav-links"></div>
+    </div>
+
+    <article class="daily-brief">
+      <div class="brief-header">
+        <span class="date">2026-07-17</span><span class="weekday">周四</span>
+        <div class="meta">投研搜索Skill · 全球市场晨报 · 占位页面</div>
+      </div>
+
+      <section class="module">
+        <h2>📢 系统初始化中</h2>
+        <div class="module-comment">这是占位页面，正式晨报将在下一个交易日 08:00 自动生成</div>
+        <div class="placeholder-box">
+          <div class="big">✅ 网址已就绪</div>
+          <div class="small">密码校验通过，说明系统正常工作。</div>
+          <div class="small" style="margin-top:10px;">下一次晨报产出时间：<strong>下一个交易日 08:00</strong></div>
+          <div class="small">届时此页面会自动替换为当日完整晨报。</div>
+        </div>
+      </section>
+    </article>
+
+  </div>
+</body>
+</html>
