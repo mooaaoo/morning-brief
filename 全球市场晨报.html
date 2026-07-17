@@ -4,103 +4,520 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>全球市场晨报</title>
-  <style>
+    <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-      background: #f5f2ed;
+      background: linear-gradient(135deg, #f5f2ed 0%, #ede4d3 100%);
       color: #1a1a2e;
       font-size: 14px;
-      line-height: 1.6;
+      line-height: 1.65;
       padding: 20px 12px;
+      min-height: 100vh;
     }
-    .container { max-width: 920px; margin: 0 auto; }
+    .container { max-width: 960px; margin: 0 auto; }
     .global-header {
       text-align: center;
-      padding: 16px 0 24px;
-      border-bottom: 2px solid #d35400;
-      margin-bottom: 24px;
+      padding: 24px 0 28px;
+      border-bottom: 3px double #d35400;
+      margin-bottom: 28px;
+      position: relative;
     }
-    .global-header h1 { font-size: 24px; color: #1a1a2e; letter-spacing: 2px; }
-    .global-header .subtitle { font-size: 12px; color: #888; margin-top: 6px; }
+    .global-header h1 {
+      font-size: 26px;
+      color: #1a1a2e;
+      letter-spacing: 3px;
+      font-weight: 700;
+    }
+    .global-header .subtitle {
+      font-size: 12.5px;
+      color: #888;
+      margin-top: 8px;
+      letter-spacing: 0.5px;
+    }
+    .global-header::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: #d35400;
+      margin: 12px auto 0;
+      border-radius: 2px;
+    }
     article.daily-brief {
       background: #fff;
-      border-radius: 10px;
-      padding: 28px 32px;
+      border-radius: 14px;
+      padding: 32px 36px;
+      margin-bottom: 32px;
+      box-shadow: 0 6px 24px rgba(211, 84, 0, 0.08), 0 2px 6px rgba(0,0,0,0.04);
+      border: 1px solid #f0ebe0;
+      transition: box-shadow 0.3s ease;
+    }
+    article.daily-brief:hover {
+      box-shadow: 0 10px 32px rgba(211, 84, 0, 0.12), 0 4px 10px rgba(0,0,0,0.06);
+    }
+    .brief-header {
+      border-left: 6px solid #d35400;
+      padding: 8px 0 8px 18px;
       margin-bottom: 28px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      border: 1px solid #e8e2d6;
+      background: linear-gradient(90deg, rgba(211,84,0,0.04) 0%, transparent 100%);
+      border-radius: 0 8px 8px 0;
     }
-    .brief-header { border-left: 5px solid #d35400; padding-left: 14px; margin-bottom: 22px; }
-    .brief-header .date { font-size: 22px; font-weight: 700; color: #1a1a2e; }
-    .brief-header .weekday { font-size: 13px; color: #888; margin-left: 8px; }
-    .brief-header .meta { font-size: 11px; color: #aaa; margin-top: 4px; }
-    section.module { margin-bottom: 26px; }
-    section.module > h2 { font-size: 16px; color: #1a1a2e; padding-bottom: 8px; border-bottom: 1px solid #eee; margin-bottom: 12px; }
-    .module-comment { font-size: 12px; color: #666; font-style: italic; margin-bottom: 10px; }
-    .placeholder-box {
-      padding: 30px 20px;
+    .brief-header .date {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1a1a2e;
+      letter-spacing: 1px;
+    }
+    .brief-header .weekday {
+      font-size: 14px;
+      color: #888;
+      margin-left: 10px;
+      padding: 2px 10px;
       background: #faf6ef;
-      border: 1px dashed #d35400;
-      border-radius: 8px;
-      text-align: center;
-      color: #555;
+      border-radius: 12px;
     }
-    .placeholder-box .big { font-size: 18px; color: #d35400; margin-bottom: 8px; }
-    .placeholder-box .small { font-size: 12px; color: #888; }
+    .brief-header .meta {
+      font-size: 11.5px;
+      color: #aaa;
+      margin-top: 6px;
+      letter-spacing: 0.3px;
+    }
+    section.module { margin-bottom: 30px; }
+    section.module > h2 {
+      font-size: 17px;
+      color: #1a1a2e;
+      padding: 10px 0 10px 12px;
+      border-left: 4px solid #d35400;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.5px;
+    }
+    .module-comment {
+      font-size: 12.5px;
+      color: #666;
+      font-style: italic;
+      margin-bottom: 12px;
+      line-height: 1.7;
+    }
+    /* 行情表格通用 */
+    table.market-table, table.sixdim-table, table.macro-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    table.market-table th, table.sixdim-table th, table.macro-table th {
+      background: linear-gradient(180deg, #faf6ef 0%, #f5ede0 100%);
+      color: #555;
+      font-weight: 600;
+      padding: 10px 10px;
+      text-align: left;
+      border-bottom: 2px solid #d35400;
+      letter-spacing: 0.3px;
+    }
+    table.market-table td, table.sixdim-table td, table.macro-table td {
+      padding: 9px 10px;
+      border-bottom: 1px solid #f0ebe0;
+    }
+    table.market-table tbody tr:hover td,
+    table.sixdim-table tbody tr:hover td,
+    table.macro-table tbody tr:hover td { background: #faf6ef; }
+    .red    { color: #d44;   font-weight: 600; }
+    .green  { color: #2a9d4a; font-weight: 600; }
+    .neutral{ color: #888; }
+    .data-source {
+      font-size: 11px;
+      color: #888;
+      margin-top: 10px;
+      font-style: italic;
+    }
+    /* 六维行情表格（A股宽基） */
+    table.sixdim-table {
+      font-size: 12.5px;
+    }
+    table.sixdim-table thead th {
+      text-align: right;
+      padding: 9px 8px;
+    }
+    table.sixdim-table thead th.group-close {
+      background: linear-gradient(180deg, #fdf0e0 0%, #f9e0c4 100%);
+      color: #b8541a;
+      border-right: 1px solid #e8d5b5;
+    }
+    table.sixdim-table thead th.group-vol {
+      background: linear-gradient(180deg, #e8f0fa 0%, #d5e0ee 100%);
+      color: #2a5d9f;
+      border-right: 1px solid #d5e0ee;
+    }
+    table.sixdim-table thead th.col-name {
+      text-align: left;
+    }
+    table.sixdim-table thead th.group-header {
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      padding: 7px 8px 5px;
+      border-bottom: none;
+      text-transform: uppercase;
+    }
+    table.sixdim-table tbody td {
+      padding: 8px 8px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    table.sixdim-table tbody td.col-name {
+      text-align: left;
+      font-weight: 600;
+      color: #1a1a2e;
+    }
+    table.sixdim-table tbody td.col-close,
+    table.sixdim-table tbody td.col-vol {
+      color: #555;
+      font-weight: 500;
+    }
+    table.sixdim-table tbody td.divider {
+      border-right: 1px solid #f0ebe0;
+    }
+    /* 宏观因子表格 */
+    table.macro-table th {
+      background: linear-gradient(180deg, #f0f4fa 0%, #e3eaf3 100%);
+      border-bottom: 2px solid #2a5d9f;
+    }
+    table.macro-table td.macro-name {
+      font-weight: 600;
+      color: #1a1a2e;
+    }
+    table.macro-table td.macro-value {
+      font-variant-numeric: tabular-nums;
+      font-weight: 600;
+      color: #2a5d9f;
+    }
+    .module-subtitle {
+      font-size: 12px;
+      color: #888;
+      margin: 8px 0 12px;
+      letter-spacing: 0.3px;
+    }
+    .module-subtitle .tag-close {
+      display: inline-block;
+      padding: 2px 8px;
+      background: linear-gradient(135deg, #fdf0e0 0%, #f9e0c4 100%);
+      color: #b8541a;
+      border-radius: 10px;
+      font-size: 10.5px;
+      margin-right: 6px;
+      font-weight: 600;
+    }
+    .module-subtitle .tag-vol {
+      display: inline-block;
+      padding: 2px 8px;
+      background: linear-gradient(135deg, #e8f0fa 0%, #d5e0ee 100%);
+      color: #2a5d9f;
+      border-radius: 10px;
+      font-size: 10.5px;
+      font-weight: 600;
+    }
+    .module-subtitle .tag-macro {
+      display: inline-block;
+      padding: 2px 8px;
+      background: linear-gradient(135deg, #f0f4fa 0%, #e3eaf3 100%);
+      color: #2a5d9f;
+      border-radius: 10px;
+      font-size: 10.5px;
+      font-weight: 600;
+      margin-right: 6px;
+    }
+    /* 情绪总结卡片 */
+    .sentiment-card {
+      background: linear-gradient(135deg, #fdf6ec 0%, #faf0e0 100%);
+      border-left: 4px solid #d35400;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 16px;
+      font-size: 12.5px;
+      color: #444;
+      line-height: 1.75;
+      box-shadow: 0 2px 6px rgba(211, 84, 0, 0.06);
+    }
+    .sentiment-card.macro {
+      background: linear-gradient(135deg, #f0f4fa 0%, #e3eaf3 100%);
+      border-left: 4px solid #2a5d9f;
+      box-shadow: 0 2px 6px rgba(42, 93, 159, 0.06);
+    }
+    .sentiment-card strong {
+      color: #b8541a;
+      font-weight: 700;
+    }
+    .sentiment-card.macro strong {
+      color: #2a5d9f;
+    }
+    /* 十大事件 */
+    .event-item {
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #faf6ef 0%, #f5ede0 100%);
+      border-left: 4px solid #d35400;
+      border-radius: 6px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .event-item:hover {
+      transform: translateX(2px);
+      box-shadow: 0 3px 8px rgba(211, 84, 0, 0.1);
+    }
+    .event-item .event-title {
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 6px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .event-item .event-title .rank {
+      display: inline-block;
+      min-width: 24px;
+      height: 24px;
+      line-height: 24px;
+      text-align: center;
+      background: linear-gradient(135deg, #d35400 0%, #b8541a 100%);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 12px;
+      margin-right: 8px;
+      font-weight: 700;
+      box-shadow: 0 2px 4px rgba(211, 84, 0, 0.3);
+    }
+    .event-item .event-summary {
+      font-size: 12.5px;
+      color: #444;
+      margin-bottom: 8px;
+      line-height: 1.7;
+    }
+    .event-item .event-source {
+      font-size: 11px;
+      color: #888;
+    }
+    .event-item .event-source a {
+      color: #d35400;
+      text-decoration: none;
+      margin-right: 6px;
+      transition: color 0.2s;
+    }
+    .event-item .event-source a:hover { color: #b8541a; text-decoration: underline; }
+    .source-level {
+      display: inline-block;
+      padding: 1px 7px;
+      border-radius: 3px;
+      font-size: 10px;
+      margin-left: 4px;
+      font-weight: 600;
+    }
+    .source-level.l1 { background: #ffeaa7; color: #7a5c00; }
+    .source-level.l2 { background: #dfe6e9; color: #444; }
+    /* 共识与分歧 */
+    .consensus-box, .divergence-box {
+      padding: 14px 16px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .consensus-box {
+      background: linear-gradient(135deg, #fdf6ec 0%, #f5ede0 100%);
+      border-left: 4px solid #27ae60;
+    }
+    .divergence-box {
+      background: linear-gradient(135deg, #fef5f5 0%, #fde8e8 100%);
+      border-left: 4px solid #d44;
+    }
+    .box-title {
+      font-weight: 700;
+      margin-bottom: 8px;
+      font-size: 13.5px;
+      letter-spacing: 0.3px;
+    }
+    .consensus-box .box-title { color: #27ae60; }
+    .divergence-box .box-title { color: #d44; }
+    .stance-line {
+      font-size: 12.5px;
+      margin: 5px 0;
+      color: #444;
+      line-height: 1.7;
+    }
+    .stance-line .org {
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+    .interest-note {
+      font-size: 11.5px;
+      color: #888;
+      font-style: italic;
+      margin-top: 8px;
+      padding: 6px 10px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 4px;
+    }
+    .cross-verify {
+      background: linear-gradient(135deg, #eafaf1 0%, #d4f0e0 100%);
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      color: #1a1a2e;
+      margin-top: 10px;
+      border-left: 4px solid #27ae60;
+      line-height: 1.7;
+    }
+    /* 噪音表格 */
+    .noise-table th { background: linear-gradient(180deg, #fef5f5 0%, #fde8e8 100%) !important; border-bottom: 2px solid #d44 !important; }
+    .noise-table td.heat {
+      text-align: center;
+      font-weight: 600;
+    }
+    /* 今日关注 */
+    .focus-item {
+      padding: 12px 16px;
+      background: linear-gradient(135deg, #faf6ef 0%, #f5ede0 100%);
+      border-radius: 6px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      border-left: 3px solid #d35400;
+      transition: transform 0.2s;
+    }
+    .focus-item:hover { transform: translateX(2px); }
+    .focus-item .focus-event {
+      font-weight: 600;
+      color: #1a1a2e;
+    }
+    .focus-item .focus-threshold {
+      font-size: 11.5px;
+      color: #666;
+      margin-top: 5px;
+      line-height: 1.6;
+    }
+    /* 页脚 */
+    .brief-footer {
+      margin-top: 24px;
+      padding: 14px 16px;
+      border-top: 1px dashed #ddd;
+      font-size: 11px;
+      color: #888;
+      background: #faf6ef;
+      border-radius: 6px;
+      line-height: 1.7;
+    }
+    .tool-usage {
+      margin-top: 8px;
+      color: #555;
+      padding-top: 8px;
+      border-top: 1px dashed #e0d5b5;
+    }
+    .tool-usage .yes { color: #27ae60; font-weight: 600; }
+    .tool-usage .no  { color: #ccc; }
+    /* 密码门 */
     #auth-gate {
       position: fixed; inset: 0;
-      background: #f5f2ed;
+      background: linear-gradient(135deg, #f5f2ed 0%, #ede4d3 100%);
       display: flex; align-items: center; justify-content: center;
       z-index: 9999;
     }
     #auth-gate .auth-card {
       background: #fff;
       border: 1px solid #e8e2d6;
-      border-radius: 10px;
-      padding: 28px 32px;
-      width: 320px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      border-radius: 14px;
+      padding: 32px 36px;
+      width: 340px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
       text-align: center;
     }
-    #auth-gate h2 { font-size: 18px; color: #1a1a2e; margin-bottom: 6px; }
-    #auth-gate p { font-size: 12px; color: #888; margin-bottom: 16px; }
+    #auth-gate h2 { font-size: 20px; color: #1a1a2e; margin-bottom: 6px; letter-spacing: 1px; }
+    #auth-gate p { font-size: 12.5px; color: #888; margin-bottom: 18px; }
     #auth-gate input {
-      width: 100%; padding: 10px 12px;
-      border: 1px solid #ddd; border-radius: 6px;
-      font-size: 14px; margin-bottom: 10px;
-      text-align: center; letter-spacing: 2px;
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-bottom: 12px;
+      text-align: center;
+      letter-spacing: 2px;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-    #auth-gate input:focus { outline: none; border-color: #d35400; }
+    #auth-gate input:focus {
+      outline: none;
+      border-color: #d35400;
+      box-shadow: 0 0 0 3px rgba(211, 84, 0, 0.1);
+    }
     #auth-gate button {
-      width: 100%; padding: 10px;
-      background: #d35400; color: #fff;
-      border: none; border-radius: 6px;
-      font-size: 14px; font-weight: 600; cursor: pointer;
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #d35400 0%, #b8541a 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 3px 8px rgba(211, 84, 0, 0.3);
     }
-    #auth-gate button:hover { background: #b8541a; }
-    #auth-gate .auth-error { color: #d44; font-size: 12px; margin-top: 8px; min-height: 16px; }
+    #auth-gate button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 5px 12px rgba(211, 84, 0, 0.4);
+    }
+    #auth-gate .auth-error { color: #d44; font-size: 12px; margin-top: 10px; min-height: 16px; }
     body.authed #auth-gate { display: none; }
     body:not(.authed) .container { display: none; }
+    /* 过往一周导航条 */
     .week-nav {
-      background: #fdf6ec;
+      background: linear-gradient(135deg, #fdf6ec 0%, #faf0e0 100%);
       border: 1px solid #e8d5b5;
-      border-radius: 8px;
-      padding: 10px 14px;
-      margin-bottom: 20px;
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 24px;
       font-size: 12.5px;
+      box-shadow: 0 2px 6px rgba(211, 84, 0, 0.06);
     }
-    .week-nav .nav-title { font-weight: 600; color: #b8541a; margin-bottom: 6px; }
-    .week-nav .nav-links { display: flex; flex-wrap: wrap; gap: 6px; }
+    .week-nav .nav-title { font-weight: 700; color: #b8541a; margin-bottom: 8px; letter-spacing: 0.5px; }
+    .week-nav .nav-links { display: flex; flex-wrap: wrap; gap: 7px; }
     .week-nav .nav-links a {
-      display: inline-block; padding: 3px 10px;
-      background: #fff; border: 1px solid #e8d5b5;
-      border-radius: 12px; color: #555;
-      text-decoration: none; font-size: 11.5px;
+      display: inline-block;
+      padding: 4px 12px;
+      background: #fff;
+      border: 1px solid #e8d5b5;
+      border-radius: 14px;
+      color: #555;
+      text-decoration: none;
+      font-size: 11.5px;
+      transition: all 0.2s;
+    }
+    .week-nav .nav-links a:hover {
+      background: linear-gradient(135deg, #d35400 0%, #b8541a 100%);
+      color: #fff;
+      border-color: #d35400;
+      transform: translateY(-1px);
     }
     .week-nav .nav-links a.today {
-      background: #d35400; color: #fff;
-      border-color: #d35400; font-weight: 600;
+      background: linear-gradient(135deg, #d35400 0%, #b8541a 100%);
+      color: #fff;
+      border-color: #d35400;
+      font-weight: 600;
+      box-shadow: 0 2px 4px rgba(211, 84, 0, 0.3);
+    }
+    /* 响应式 */
+    @media (max-width: 768px) {
+      body { padding: 12px 6px; font-size: 13px; }
+      article.daily-brief { padding: 20px 18px; }
+      .brief-header .date { font-size: 22px; }
+      section.module > h2 { font-size: 15px; }
+      table.sixdim-table, table.market-table, table.macro-table { font-size: 11.5px; }
+      table.sixdim-table th, table.sixdim-table td { padding: 6px 5px; }
+      .event-item { padding: 12px 14px; }
+      .event-item .event-title { font-size: 13px; }
     }
   </style>
 </head>
@@ -197,23 +614,25 @@
     <article class="daily-brief">
       <div class="brief-header">
         <span class="date">2026-07-17</span><span class="weekday">周四</span>
-        <div class="meta">投研搜索Skill · 全球市场晨报 · A股宽基六维 + 15全球权益指数</div>
+        <div class="meta">投研搜索Skill · 全球市场晨报 · A股宽基六维 + 15全球权益指数 + 大宗商品与利率</div>
       </div>
 
       <section class="module">
         <h2>📊 行情复盘</h2>
-        <div class="module-comment">韩股熔断+韩国央行意外加息+半导体股灾全球传导，A股宽基7/17全线重挫，创业板跌7.15%、科创50跌7.12%领跌；上证50跌幅最小(-2.63%)；A股全线放量杀跌(成交量日涨14-27%)。港股靠阿里通义千问入Apple Intelligence逆势走强，美股受半导体拖累收跌，欧洲分化。</div>
+        <div class="module-comment">韩股熔断+韩国央行意外加息+半导体股灾全球传导，A股宽基7/17全线重挫，创业板跌7.15%、科创50跌7.12%领跌；上证50跌幅最小(-2.63%)；A股全线放量杀跌(成交量日涨14-27%)。港股靠阿里通义千问入Apple Intelligence逆势走强，美股受半导体拖累收跌，欧洲分化。大宗商品方面，原油因美伊冲突维持高位，黄金跌破4000美元，VIX恐慌指数单日飙10%至18.40。</div>
 
         <div class="module-subtitle">
           <span class="tag-close">主表 · A股宽基六维</span>
           <span class="tag-vol">成交量三维</span>
-          收盘价日/月/年涨跌 + 成交量日/周/月涨跌（按约定顺序排列）
+          收盘价+成交量 + 收盘价日/月/年涨跌 + 成交量日/周/月涨跌（按约定顺序排列）
         </div>
         <table class="sixdim-table">
           <thead>
             <tr>
               <th rowspan="2" class="col-name">指数</th>
+              <th rowspan="2" class="col-name">收盘价</th>
               <th colspan="3" class="group-header group-close">收盘价涨跌（橙）</th>
+              <th rowspan="2" class="col-name">成交量(亿股)</th>
               <th colspan="3" class="group-header group-vol">成交量涨跌（蓝）</th>
             </tr>
             <tr>
@@ -228,63 +647,88 @@
           <tbody>
             <tr>
               <td class="col-name">上证指数</td>
+              <td class="col-close">3,764.16</td>
               <td class="green">-3.05%</td><td class="green">-8.37%</td><td class="green">-7.48%</td>
-              <td class="divider red">+21.52%</td><td class="red">+3.67%</td><td class="red">+6.97%</td>
+              <td class="divider col-vol">65.05</td>
+              <td class="red">+21.52%</td><td class="red">+3.67%</td><td class="red">+6.97%</td>
             </tr>
             <tr>
               <td class="col-name">深证成指</td>
+              <td class="col-close">13,706.88</td>
               <td class="green">-5.40%</td><td class="green">-13.69%</td><td class="green">-12.00%</td>
-              <td class="divider red">+14.70%</td><td class="green">-7.82%</td><td class="red">+2.39%</td>
+              <td class="divider col-vol">76.38</td>
+              <td class="red">+14.70%</td><td class="green">-7.82%</td><td class="red">+2.39%</td>
             </tr>
             <tr>
               <td class="col-name">国证A股(全市场)</td>
+              <td class="col-close">4,862.19</td>
               <td class="green">-4.29%</td><td class="green">-10.29%</td><td class="green">-8.76%</td>
-              <td class="divider red">+19.90%</td><td class="green">-5.06%</td><td class="red">+4.73%</td>
+              <td class="divider col-vol">—</td>
+              <td class="red">+19.90%</td><td class="green">-5.06%</td><td class="red">+4.73%</td>
             </tr>
             <tr>
               <td class="col-name">创业板指</td>
+              <td class="col-close">3,428.63</td>
               <td class="green">-7.15%</td><td class="green">-17.72%</td><td class="green">-15.09%</td>
-              <td class="divider red">+16.01%</td><td class="green">-7.26%</td><td class="red">+3.77%</td>
+              <td class="divider col-vol">23.72</td>
+              <td class="red">+16.01%</td><td class="green">-7.26%</td><td class="red">+3.77%</td>
             </tr>
             <tr>
               <td class="col-name">科创50</td>
+              <td class="col-close">1,715.40</td>
               <td class="green">-7.12%</td><td class="green">-6.81%</td><td class="green">-2.05%</td>
-              <td class="divider red">+16.89%</td><td class="green">-27.93%</td><td class="green">-7.71%</td>
+              <td class="divider col-vol">16.63</td>
+              <td class="red">+16.89%</td><td class="green">-27.93%</td><td class="green">-7.71%</td>
             </tr>
             <tr>
               <td class="col-name">上证50</td>
+              <td class="col-close">2,827.67</td>
               <td class="green">-2.63%</td><td class="green">-3.64%</td><td class="green">-3.20%</td>
-              <td class="divider red">+27.51%</td><td class="red">+18.40%</td><td class="red">+33.58%</td>
+              <td class="divider col-vol">7.14</td>
+              <td class="red">+27.51%</td><td class="red">+18.40%</td><td class="red">+33.58%</td>
             </tr>
             <tr>
               <td class="col-name">沪深300</td>
+              <td class="col-close">4,529.10</td>
               <td class="green">-3.60%</td><td class="green">-8.16%</td><td class="green">-7.42%</td>
-              <td class="divider red">+20.30%</td><td class="green">-0.49%</td><td class="red">+9.63%</td>
+              <td class="divider col-vol">30.26</td>
+              <td class="red">+20.30%</td><td class="green">-0.49%</td><td class="red">+9.63%</td>
             </tr>
             <tr>
               <td class="col-name">中证500</td>
+              <td class="col-close">7,513.76</td>
               <td class="green">-5.55%</td><td class="green">-12.90%</td><td class="green">-10.12%</td>
-              <td class="divider red">+22.60%</td><td class="green">-5.83%</td><td class="red">+5.39%</td>
+              <td class="divider col-vol">23.67</td>
+              <td class="red">+22.60%</td><td class="green">-5.83%</td><td class="red">+5.39%</td>
             </tr>
             <tr>
               <td class="col-name">中证1000</td>
+              <td class="col-close">7,168.00</td>
               <td class="green">-6.08%</td><td class="green">-17.65%</td><td class="green">-14.76%</td>
-              <td class="divider red">+19.34%</td><td class="green">-3.97%</td><td class="red">+4.97%</td>
+              <td class="divider col-vol">29.62</td>
+              <td class="red">+19.34%</td><td class="green">-3.97%</td><td class="red">+4.97%</td>
             </tr>
             <tr>
               <td class="col-name">国证2000</td>
+              <td class="col-close">9,271.69</td>
               <td class="green">-6.16%</td><td class="green">-17.62%</td><td class="green">-15.44%</td>
-              <td class="divider red">+18.62%</td><td class="green">-2.13%</td><td class="red">+0.17%</td>
+              <td class="divider col-vol">—</td>
+              <td class="red">+18.62%</td><td class="green">-2.13%</td><td class="red">+0.17%</td>
             </tr>
           </tbody>
         </table>
-        <div class="data-source" style="margin-top:10px;">数据来源：新浪财经 K线 API（Vibe-Research a-stock-data 兜底方案，2026-07-17 收盘）· 涨红跌绿</div>
+        <div class="data-source">数据来源：新浪财经 K线 API（Vibe-Research a-stock-data 兜底方案，2026-07-17 收盘）· 成交量单位为"亿股"（新浪原始 volume 字段除以1e8）· 涨红跌绿</div>
 
-        <div class="module-comment" style="margin-top:14px;background:#fdf6ec;padding:10px 14px;border-left:3px solid #d35400;border-radius:4px;">
-          <strong>💡 A股宽基六维情绪总结：</strong>A股7/17全线重挫，10只宽基全部放量杀跌（成交量日涨14-27%），典型的<strong>恐慌性抛售</strong>特征。<strong>风格分化明显</strong>：上证50跌幅最小(-2.63%)且成交量月涨33.58%，蓝筹防御性获资金认可，成为避风港；创业板(-7.15%)、科创50(-7.12%)领跌，科技股集中营遭集中抛售。<strong>中小盘已进入技术性熊市</strong>：中证1000/国证2000 月跌超17%、年跌超14%，且成交量月涨仅0-5%（承接力弱），弱势格局短期难反转。<strong>科创50量价背离警示</strong>：日跌7.12%但成交量周缩27.93%、月缩7.71%，反映资金持续流出且无新增承接，后市仍承压。<strong>整体情绪</strong>：风险传导大于基本面恶化，但放量杀跌尚未结束，短期需关注创业板3300/科创50 1700 关键支撑。
+        <div class="sentiment-card">
+          <strong>💡 A股宽基六维情绪总结：</strong><br>
+          <strong>【全天成交量】</strong>A股7/17全天成交约2.42万亿元（连续5日缩量后的放量杀跌），10只宽基成交量日涨14-27%，属典型的<strong>恐慌性抛售</strong>。上证50成交量日涨27.51%为全场最高，蓝筹遭集中抛售但承接力最强；中小盘成交量同步放大但月增幅仅0-5%，显示<strong>承接力虚弱</strong>。<br>
+          <strong>【黄白线（权重 vs 等权）】</strong>上证50(-2.63%) < 沪深300(-3.60%) < 国证A股(-4.29%) < 上证指数(-3.05%)，权重股明显抗跌，黄线（加权）远高于白线（等权），反映<strong>大盘蓝筹撑盘、中小盘自由落体</strong>的极端分化；创业板-7.15%与科创50-7.12%领跌，成长股白线深陷下方。<br>
+          <strong>【风格】</strong>价值 > 成长、大盘 > 中小盘、防御 > 进攻。上证50(价值/防御)跌幅最小且量月涨33.58%（资金避风港确认）；创业板/科创50(成长/进攻)跌幅最大且量月缩7.71%（资金持续流出）；中小盘(中证1000/国证2000)月跌超17%进入<strong>技术性熊市</strong>。<br>
+          <strong>【板块】</strong>申万一级行业中，仅传媒(+1.66%)、农林牧渔(+1.57%)、美容护理(+1.23%) 逆势收涨，属典型防御+消费切换；领跌为建筑材料(-4.37%)、电子(-4.25%)、通信(-3.61%)，半导体产业链全线崩溃。哈药股份5连板、星网锐捷涨停，低位业绩预喜股成资金避风港。<br>
+          <strong>【整体情绪】</strong>风险传导大于基本面恶化，放量杀跌尚未结束。短期关键支撑：创业板3300、科创50 1700；若失守则中小盘进入深度熊市。但上证50的相对韧性+成交量爆量，说明<strong>蓝筹底部承接资金已进场</strong>，市场见底信号初现但需1-2日确认。
         </div>
 
-        <div class="module-subtitle" style="margin-top:18px;">
+        <div class="module-subtitle" style="margin-top:22px;">
           次表 · 15全球权益指数简表（收盘值/日/月/年，按区域重排：美股→日韩→上证→港股→欧股→新兴市场）
         </div>
         <table class="market-table">
@@ -315,10 +759,105 @@
             <tr><td>越南胡志明</td>  <td>1,804.24</td><td class="red">+1.24%</td><td class="green">-2.10%</td><td class="red">+12.30%</td></tr>
           </tbody>
         </table>
-        <div class="data-source" style="margin-top:10px;">数据来源：EXA搜索 · AP/CNBC/Investopedia/Sharecast/Reuters/Seoul Economic Daily/ECONPLEX/Economic Times/RioTimes/Vietnam.vn · 各资产按其交易时间更新至最新收盘 · 涨红跌绿</div>
+        <div class="data-source">数据来源：EXA搜索 · AP/CNBC/Investopedia/Sharecast/Reuters/Seoul Economic Daily/ECONPLEX/Economic Times/RioTimes/Vietnam.vn · 各资产按其交易时间更新至最新收盘 · 涨红跌绿</div>
 
-        <div class="module-comment" style="margin-top:14px;background:#fdf6ec;padding:10px 14px;border-left:3px solid #d35400;border-radius:4px;">
+        <div class="sentiment-card">
           <strong>💡 全球权益指数情绪总结：</strong>全球市场呈现<strong>"科技股灾+防御股抗跌+港股独立行情"</strong>三极分化格局。<strong>美股</strong>：道指仅-0.20%、标普-0.51%，但纳指-1.47%，半导体拖累科技股，资金向防御板块轮动，美股情绪"分化偏弱"。<strong>日韩台</strong>：韩股-6.37%熔断（年内第8次）+ 日经-2.79% + 台湾加权-0.01%几乎持平，亚太科技股灾中心，<strong>极度恐慌</strong>，韩股散户杠杆爆仓潮加剧抛售螺旋。<strong>上证</strong>：-3.05%放量杀跌，作为亚洲第二大市场被风险传导拖累，但跌幅小于韩日，<strong>相对韧性</strong>。<strong>港股</strong>：恒生+1.33%、恒生科技+1.98%逆势走强，阿里通义千问入Apple Intelligence中国版成独立催化，<strong>独立行情</strong>，是亚太唯一避风港。<strong>欧股</strong>：英富时100+0.54%（防御性强+英镑走弱利好出口），法德股市小幅下跌，欧洲"低波动分化"。<strong>新兴市场</strong>：印度Nifty几乎持平、巴西-0.36%、越南+1.24%，新兴市场整体抗跌，<strong>风险隔离度较高</strong>。<strong>整体情绪</strong>：全球风险偏好显著回落，但并未全面崩盘，资金从科技股向防御资产+中国AI主题+新兴市场轮动。
+        </div>
+      </section>
+
+      <section class="module">
+        <h2>💱 大宗商品与利率</h2>
+        <div class="module-comment">跟踪原油/贵金属/美债收益率/VIX/费城半导体等宏观与科技板块情绪关键因子，2026-07-16 美股收盘数据</div>
+
+        <div class="module-subtitle">
+          <span class="tag-macro">宏观因子</span>
+          <span class="tag-macro">科技情绪</span>
+          最新数值 + 日变动 + 机构预期（如适用）
+        </div>
+        <table class="macro-table">
+          <thead>
+            <tr>
+              <th>因子</th>
+              <th>最新数值</th>
+              <th>日变动</th>
+              <th>机构预期/解读</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="macro-name">Brent 原油</td>
+              <td class="macro-value">$84.23/桶</td>
+              <td class="green">-1.0%</td>
+              <td>美伊冲突溢价维持；7/10以来累涨10.8%。高盛：若霍尔木兹海峡受阻，Brent或上探$95</td>
+            </tr>
+            <tr>
+              <td class="macro-name">WTI 原油</td>
+              <td class="macro-value">$78.95/桶</td>
+              <td class="green">-0.8%</td>
+              <td>同上；CFTC数据显示空头回补是上涨主因。花旗：Q3均价$82，Q4回落至$75</td>
+            </tr>
+            <tr>
+              <td class="macro-name">现货黄金</td>
+              <td class="macro-value">$3,976.28/盎司</td>
+              <td class="green">-2.06%</td>
+              <td>跌破$4000心理关口，美元走强+美债收益率上行压制。瑞银：年底$4,200目标不变</td>
+            </tr>
+            <tr>
+              <td class="macro-name">现货白银</td>
+              <td class="macro-value">$56.04/盎司</td>
+              <td class="green">-2.94%</td>
+              <td>金银比升至71，工业属性受全球经济放缓担忧拖累</td>
+            </tr>
+            <tr>
+              <td class="macro-name">美2Y国债收益率</td>
+              <td class="macro-value">4.154%</td>
+              <td class="red">+3.8bp</td>
+              <td>CME FedWatch：9月加息概率53%（前值10.2%），7月维持利率不变为基准预期</td>
+            </tr>
+            <tr>
+              <td class="macro-name">美10Y国债收益率</td>
+              <td class="macro-value">4.57%</td>
+              <td class="red">+2.9bp</td>
+              <td>10Y-2Y利差+41.6bp（倒挂解除），衰退信号减弱但油价通胀忧虑回升</td>
+            </tr>
+            <tr>
+              <td class="macro-name">VIX 恐慌指数</td>
+              <td class="macro-value">16.73</td>
+              <td class="red">+4.02%</td>
+              <td>7/17盘中进一步飙升至18.40(+10.10%)，恐慌情绪扩散；30以下为正常区间，20以上为高警觉</td>
+            </tr>
+            <tr>
+              <td class="macro-name">费城半导体指数(SOX)</td>
+              <td class="macro-value">11,867.50</td>
+              <td class="green">-4.29%</td>
+              <td>连续2日大跌，TSMC资本开支上调引发"AI需求见顶"担忧；年内仍涨82%，回撤力度加大</td>
+            </tr>
+            <tr>
+              <td class="macro-name">美元指数(DXY)</td>
+              <td class="macro-value">100.78</td>
+              <td class="red">+0.3%</td>
+              <td>避险买盘推动，压制黄金及新兴市场货币；欧元/美元1.1441、美元/日元162.42</td>
+            </tr>
+            <tr>
+              <td class="macro-name">比特币</td>
+              <td class="macro-value">$64,200</td>
+              <td class="green">-0.5%</td>
+              <td>风险资产同步承压，与纳指相关性维持高位</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="data-source">数据来源：Armstrong Economics / TradingKey / ts2.tech / BigGo Finance / Yahoo Finance / Investing.com / CBOE 官方 · 2026-07-16 美股收盘 · 涨红跌绿 · 国债收益率 bp 上升=红、下降=绿</div>
+
+        <div class="sentiment-card macro">
+          <strong>💡 大宗商品与利率情绪总结：</strong><br>
+          <strong>【原油】</strong>Brent $84.23 维持一个月高位，7/10以来累涨10.8%，主因美伊冲突+霍尔木兹海峡风险溢价。但7/16单日微跌1%，反映<strong>地缘溢价边际消化+空头回补结束</strong>。机构预期分化：高盛看涨（霍尔木兹受阻则$95），花旗看跌（Q4 $75）。<strong>对A股影响</strong>：油价上行 → 中国输入性通胀压力 → 央行宽松空间受限 → 利空A股估值。<br>
+          <strong>【贵金属】</strong>黄金跌破$4000心理关口(-2.06%)，白银-2.94%跌幅更大，美元走强+美债收益率上行是主因。<strong>反常信号</strong>：风险资产普跌但黄金未获避险买盘，说明<strong>流动性收紧压力>避险需求</strong>，资金在去杠杆而非转向避险资产。瑞银维持年底$4,200目标，但短期需守住$3,900支撑。<br>
+          <strong>【美债收益率】</strong>2Y +3.8bp至4.154%、10Y +2.9bp至4.57%，<strong>9月加息概率从10.2%飙升至53%</strong>——这是本轮最大的宏观鹰派信号。达拉斯联储主席Logan称"利率可适度走高"，Waller警告能源价格向核心通胀传导。10Y-2Y利差+41.6bp（倒挂解除），衰退信号减弱但<strong>"高利率更久"</strong>共识强化。<br>
+          <strong>【VIX恐慌指数】</strong>7/16收盘16.73(+4.02%)，7/17盘中进一步飙至18.40(+10.10%)，<strong>恐慌情绪指数级扩散</strong>。VIX突破20即进入高警觉区间，若持续突破25则确认中级调整。当前水平对应"<strong>风险偏好回落但未崩盘</strong>"。<br>
+          <strong>【费城半导体SOX】</strong>单日-4.29%连续2日大跌，但年内仍涨82%，<strong>主升浪后的健康回撤</strong>还是"<strong>AI泡沫破裂起点</strong>"——市场分歧加剧。SOX与A股半导体/科创50高度联动，7/17科创50-7.12%印证传导链。<br>
+          <strong>【美元指数】</strong>DXY 100.78(+0.3%)走强，对人民币汇率形成压力（美元/离岸人民币6.7766），但A股北向资金7/17未现大幅流出（数据待披露），<strong>汇率传导渠道暂稳</strong>。<br>
+          <strong>【整体宏观情绪】</strong>：<strong>鹰派+避险+去杠杆</strong>三重叠加。油价通胀→ Fed 9月加息概率飙升至53% → 美债收益率上行 → 美元走强 → 风险资产承压。这是<strong>2026年下半年最严峻的宏观组合</strong>，A股短期难以独立行情，需等待Fed信号明确+VIX见顶回落。
         </div>
       </section>
 
@@ -393,8 +932,8 @@
         </div>
 
         <div class="event-item">
-          <div class="event-title"><span class="rank">8</span>美伊冲突升级：美军对伊朗发动当日第二波打击，油价上行</div>
-          <div class="event-summary">速览：WSJ报道特朗普倾向于扩大对伊朗的军事行动，美军7/16对伊朗发动当日第二波打击。德黑兰警告可能限制地区能源出口，霍尔木兹海峡风险溢价回升。布伦特原油+0.74%至85.58美元/桶（欧盘）/ 收盘微跌0.8%至84.25美元（美股盘），WTI -0.7%至79美元。黄金-1.8%至3980美元/盎司（风险资产普跌但黄金未获避险买盘）。</div>
+          <div class="event-title"><span class="rank">8</span>美伊冲突升级：美军对伊朗发动当日第二波打击，油价维持高位</div>
+          <div class="event-summary">速览：WSJ报道特朗普倾向于扩大对伊朗的军事行动，美军7/16对伊朗发动当日第二波打击。德黑兰警告可能限制地区能源出口，霍尔木兹海峡风险溢价回升。布伦特原油+0.74%至85.58美元/桶（欧盘）/ 收盘微跌0.8%至84.25美元（美股盘），WTI -0.7%至79美元。黄金-1.8%至3980美元/盎司（风险资产普跌但黄金未获避险买盘）。伊朗指示胡塞武装准备红海封锁，地缘风险扩散。</div>
           <div class="event-source">
             来源：<a href="https://www.lse.co.uk/news/europe-close-stocks-weaker-on-geopolitical-tensions-tech-concerns-u494ew5xrncuem5.html">Sharecast/LSE</a><span class="source-level l1">一级</span>
             · <a href="https://www.investopedia.com/stock-market-today-dow-jones-s-and-p-500-07162026-12020420">Investopedia</a><span class="source-level l1">一级</span>
@@ -465,6 +1004,11 @@
               <td class="heat">中</td>
               <td>A股7/17暴跌是韩股熔断+TSMC资本开支引发半导体股灾的全球风险传导，上证50跌幅仅-2.63%（蓝筹防御性），与"外资做空"无关；上证50成交量日涨27.51%+月涨33.58%，符合恐慌性放量杀跌特征，非定向做空迹象。<a href="https://finance.sina.com.cn/realstock/company/sh000001/hisdata.shtml">新浪财经指数K线</a></td>
             </tr>
+            <tr>
+              <td>"油价上涨是因为伊朗要封锁霍尔木兹海峡"——部分自媒体夸大</td>
+              <td class="heat">中</td>
+              <td>白宫新闻秘书Leavitt 7/16表示"伊朗想达成协议"，美国开放谈判；油价上行主因是7月初空头回补（CFTC数据证实）+地缘溢价，而非实质性封锁。BigGo Finance分析指出"获利了结+地缘不确定性"是7/16回落主因。<a href="https://finance.biggo.com/news/e4bba72f-78c6-4295-a88d-a76facafaebd">BigGo Finance</a></td>
+            </tr>
           </tbody>
         </table>
       </section>
@@ -491,15 +1035,19 @@
           <div class="focus-event">• A股7/18开盘情绪：关注创业板指能否守住3300点、科创50能否守住1700点</div>
           <div class="focus-threshold">关键阈值参考（来源：尚艺基金王峥）：若创业板失守3300 → 中小盘进入技术性熊市，进一步下看3100；若放量反弹站上3600 → 短期超跌反弹确立</div>
         </div>
+        <div class="focus-item">
+          <div class="focus-event">• VIX恐慌指数走势：当前16.73（7/16收盘），7/17盘中已飙至18.40</div>
+          <div class="focus-threshold">关键阈值参考（来源：CBOE）：VIX突破20 → 高警觉区间，风险资产进一步承压；突破25 → 中级调整确认；回落至15以下 → 风险偏好修复</div>
+        </div>
       </section>
 
       <div class="brief-footer">
-        ⚠️ 研究局限声明：本晨报基于公开信息整理，不构成投资建议。A股宽基六维数据通过 Vibe-Research a-stock-data 兜底方案（新浪财经 K线 API）拉取，已包含完整收盘价三维+成交量三维。中证2000 替换为 国证2000（399303），万得全A 替换为 国证A股（399311），覆盖全市场。
+        ⚠️ 研究局限声明：本晨报基于公开信息整理，不构成投资建议。A股宽基六维数据通过 Vibe-Research a-stock-data 兜底方案（新浪财经 K线 API）拉取，已包含完整收盘价三维+成交量三维。中证2000 替换为 国证2000（399303），万得全A 替换为 国证A股（399311），覆盖全市场。大宗商品与利率数据来自 EXA搜索（Armstrong Economics / TradingKey / BigGo Finance / Yahoo Finance / Investing.com / CBOE 官方）。
         <div class="tool-usage">
           ✅ 本次使用的搜索/数据工具：
           EXA <span class="yes">✅</span>（实际使用 mcp__anysearch__search）
           · AnySearch <span class="yes">✅</span>
-          · 行情数据源：新浪财经 K线 API（Vibe-Research a-stock-data 兜底）+ EXA搜索（全球指数）
+          · 行情数据源：新浪财经 K线 API（Vibe-Research a-stock-data 兜底）+ EXA搜索（全球指数 + 大宗商品与利率）
         </div>
       </div>
     </article>
