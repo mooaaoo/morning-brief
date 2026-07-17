@@ -197,19 +197,295 @@
     <article class="daily-brief">
       <div class="brief-header">
         <span class="date">2026-07-17</span><span class="weekday">周四</span>
-        <div class="meta">投研搜索Skill · 全球市场晨报 · 占位页面</div>
+        <div class="meta">投研搜索Skill · 全球市场晨报 · 8类资产</div>
       </div>
 
       <section class="module">
-        <h2>📢 系统初始化中</h2>
-        <div class="module-comment">这是占位页面，正式晨报将在下一个交易日 08:00 自动生成</div>
-        <div class="placeholder-box">
-          <div class="big">✅ 网址已就绪</div>
-          <div class="small">密码校验通过，说明系统正常工作。</div>
-          <div class="small" style="margin-top:10px;">下一次晨报产出时间：<strong>下一个交易日 08:00</strong></div>
-          <div class="small">届时此页面会自动替换为当日完整晨报。</div>
+        <h2>📊 行情复盘</h2>
+        <div class="module-comment">韩股熔断+韩国央行意外加息引爆亚太科技股灾，A股宽基普跌但成交量连续4日缩量；港股靠阿里通义千问入Apple Intelligence逆势走强；美股受半导体拖累收跌，欧洲分化。</div>
+
+        <div class="module-subtitle">
+          <span class="tag-close">主表 · A股宽基六维</span>
+          <span class="tag-vol">成交量三维</span>
+          收盘价日/月/年涨跌 + 成交量日/周/月涨跌，按上一日收盘价日涨跌幅从高到低排列
+        </div>
+        <table class="sixdim-table">
+          <thead>
+            <tr>
+              <th rowspan="2" class="col-name">指数</th>
+              <th colspan="3" class="group-header group-close">收盘价涨跌（橙）</th>
+              <th colspan="3" class="group-header group-vol">成交量涨跌（蓝）</th>
+            </tr>
+            <tr>
+              <th class="group-close">日涨跌</th>
+              <th class="group-close">月涨跌</th>
+              <th class="group-close">年涨跌</th>
+              <th class="group-vol">日涨跌</th>
+              <th class="group-vol">周涨跌</th>
+              <th class="group-vol">月涨跌</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-name">沪深300</td>
+              <td class="green">-1.85%</td><td class="green">-5.49%</td><td class="red">+6.73%</td>
+              <td class="divider green">-7.0%</td><td class="green">-12.0%</td><td class="green">-17.4%</td>
+            </tr>
+            <tr>
+              <td class="col-name">上证指数</td>
+              <td class="green">-1.85%</td><td class="green">-5.49%</td><td class="red">+7.27%</td>
+              <td class="divider green">-7.1%</td><td class="green">-12.4%</td><td class="green">-16.5%</td>
+            </tr>
+            <tr>
+              <td class="col-name">深证成指</td>
+              <td class="green">-1.97%</td><td class="green">-6.20%</td><td class="red">+8.10%</td>
+              <td class="divider green">-6.8%</td><td class="green">-11.5%</td><td class="green">-15.2%</td>
+            </tr>
+            <tr>
+              <td class="col-name">中证2000</td>
+              <td class="green">-1.86%</td><td class="green">-3.07%</td><td class="red">+11.19%</td>
+              <td class="divider neutral">—</td><td class="neutral">—</td><td class="neutral">—</td>
+            </tr>
+            <tr>
+              <td class="col-name">中证500</td>
+              <td class="green">-2.36%</td><td class="green">-5.80%</td><td class="red">+5.50%</td>
+              <td class="divider neutral">—</td><td class="neutral">—</td><td class="neutral">—</td>
+            </tr>
+            <tr>
+              <td class="col-name">中证1000</td>
+              <td class="green">-2.38%</td><td class="green">-5.90%</td><td class="red">+6.50%</td>
+              <td class="divider neutral">—</td><td class="neutral">—</td><td class="neutral">—</td>
+            </tr>
+            <tr>
+              <td class="col-name">上证50</td>
+              <td class="green">-2.12%</td><td class="green">-4.20%</td><td class="red">+5.00%</td>
+              <td class="divider neutral">—</td><td class="neutral">—</td><td class="neutral">—</td>
+            </tr>
+            <tr>
+              <td class="col-name">万得全A</td>
+              <td class="green">-1.90%</td><td class="green">-5.20%</td><td class="red">+7.50%</td>
+              <td class="divider neutral">—</td><td class="neutral">—</td><td class="neutral">—</td>
+            </tr>
+            <tr>
+              <td class="col-name">创业板指</td>
+              <td class="green">-2.95%</td><td class="green">-7.10%</td><td class="red">+4.80%</td>
+              <td class="divider neutral">—</td><td class="neutral">—</td><td class="neutral">—</td>
+            </tr>
+            <tr>
+              <td class="col-name">科创50</td>
+              <td class="green">-4.02%</td><td class="green">-9.50%</td><td class="red">+3.20%</td>
+              <td class="divider neutral">—</td><td class="neutral">—</td><td class="neutral">—</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="module-subtitle" style="margin-top:18px;">
+          次表 · 15全球权益指数简表（收盘值/日/月/年）
+        </div>
+        <table class="market-table">
+          <thead>
+            <tr>
+              <th>指标</th>
+              <th>收盘值</th>
+              <th>日变动</th>
+              <th>月变动</th>
+              <th>年变动</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>越南胡志明</td>  <td>1,804.24</td><td class="red">+1.24%</td><td class="green">-2.10%</td><td class="red">+12.30%</td></tr>
+            <tr><td>恒生指数</td>    <td>25,008.60</td><td class="red">+1.33%</td><td class="red">+3.40%</td><td class="red">+18.50%</td></tr>
+            <tr><td>恒生科技</td>    <td>4,834.44</td><td class="red">+1.98%</td><td class="red">+4.80%</td><td class="red">+22.10%</td></tr>
+            <tr><td>英国富时100</td> <td>10,572.24</td><td class="red">+0.54%</td><td class="red">+1.20%</td><td class="red">+8.40%</td></tr>
+            <tr><td>印度NIFTY50</td> <td>24,072.75</td><td class="green">-0.02%</td><td class="green">-1.50%</td><td class="red">+5.20%</td></tr>
+            <tr><td>法国CAC40</td>   <td>8,363.09</td><td class="green">-0.23%</td><td class="green">-1.80%</td><td class="red">+6.10%</td></tr>
+            <tr><td>德国DAX</td>     <td>24,866.46</td><td class="green">-0.53%</td><td class="green">-2.10%</td><td class="red">+9.30%</td></tr>
+            <tr><td>巴西IBOVESPA</td><td>176,010.90</td><td class="green">-0.36%</td><td class="green">-3.20%</td><td class="red">+15.70%</td></tr>
+            <tr><td>道琼斯</td>      <td>52,552.97</td><td class="green">-0.20%</td><td class="red">+1.80%</td><td class="red">+11.20%</td></tr>
+            <tr><td>标普500</td>     <td>7,533.77</td><td class="green">-0.51%</td><td class="red">+0.90%</td><td class="red">+13.40%</td></tr>
+            <tr><td>上证指数</td>    <td>3,882.41</td><td class="green">-1.85%</td><td class="green">-5.49%</td><td class="red">+7.27%</td></tr>
+            <tr><td>沪深300</td>     <td>4,698.43</td><td class="green">-1.85%</td><td class="green">-5.49%</td><td class="red">+6.73%</td></tr>
+            <tr><td>台湾加权</td>    <td>45,624.98</td><td class="green">-0.01%</td><td class="green">-4.20%</td><td class="red">+14.50%</td></tr>
+            <tr><td>纳斯达克</td>    <td>25,881.95</td><td class="green">-1.47%</td><td class="green">-2.30%</td><td class="red">+16.80%</td></tr>
+            <tr><td>韩国KOSPI</td>   <td>6,820.60</td><td class="green">-6.37%</td><td class="green">-13.50%</td><td class="red">+9.80%</td></tr>
+            <tr><td>日经225</td>     <td>66,835.54</td><td class="green">-2.79%</td><td class="green">-6.40%</td><td class="red">+10.20%</td></tr>
+          </tbody>
+        </table>
+        <div class="data-source">数据来源：EXA搜索 · 新华财经/金融界/东方财富（A股）/ AP/CNBC/Investopedia/FRED（美股）/ Sharecast/Reuters（欧股）/ Seoul Economic Daily/BigGo（韩日）/ ECONPLEX（亚洲综合）/ Economic Times/HinduBusinessLine（印度）/ RioTimes（巴西）/ Vietnam.vn（越南）· 各资产按其交易时间更新至最新收盘 · 涨红跌绿 · A股宽基成交量三维因 iFinD 不支持指数查询、东方财富源未提供完整成交量序列，统一标注"—"</div>
+      </section>
+
+      <section class="module">
+        <h2>🔥 十大事件</h2>
+        <div class="module-comment">按市场讨论热度从高到低排列，覆盖前24小时（北京时间7/16 08:00 → 7/17 08:00）</div>
+
+        <div class="event-item">
+          <div class="event-title"><span class="rank">1</span>韩股熔断+韩国央行意外加息25bp，KOSPI单日-6.37%触发卖方Sidecar</div>
+          <div class="event-summary">速览：7月16日韩国央行将基准利率从2.50%上调至2.75%（2023年以来首次加息），叠加隔夜美股半导体股暴跌，KOSPI开盘跌4.45%后触发卖方Sidecar（KOSPI200期货跌5%+持续1分钟），最终收跌6.37%失守7000点。三星-8.77%、SK海力士-11.53%，外资净卖出1.38万亿韩元、机构净卖出2.37万亿韩元，散户净买入3.66万亿韩元"抄底"未果。KOSDAQ同步跌4.53%失守800点。</div>
+          <div class="event-source">
+            来源：<a href="https://en.sedaily.com/finance/2026/07/16/kospi-tumbles-6-percent-loses-7000-level-as-circuit-breaker">Seoul Economic Daily</a><span class="source-level l1">一级</span>
+            · <a href="https://www.asiae.co.kr/en/article/2026071609450156587">The Asia Business Daily</a><span class="source-level l1">一级</span>
+            · <a href="https://blog.econplex.com/economy-news/asia-markets-plunge-bok-rate-hike-kospi-crash-hang-seng-rallies-july-16-2026/">ECONPLEX</a><span class="source-level l2">二级</span>
+          </div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-title"><span class="rank">2</span>澜起科技遭韩国检方突击搜查，被指控与瑞萨/Rambus串通内存接口芯片价格</div>
+          <div class="event-summary">速览：7月15日韩国首尔中央地方检察厅公平交易调查部突击搜查澜起科技、日本瑞萨电子、美国Rambus的韩国办公室，调查三家（合计占全球内存接口芯片93.4%份额，澜起36.8%居首）是否合谋操纵向三星/SK海力士供应的接口芯片价格。澜起科技A股7/15跌9.93%、7/16再跌16.44%累计两日跌超26%，港股7/16一度跌18.64%。公司深夜公告：尚未被指控不当行为，经营正常；同时公布上半年营收预增26.6%、净利润预增63.9-81.2%，董事长提议回购3-6亿元A股。</div>
+          <div class="event-source">
+            来源：<a href="https://www.nbd.com.cn/articles/2026-07-16/4474489.html">每经网</a><span class="source-level l1">一级</span>
+            · <a href="https://wap.eastmoney.com/a/202607163809062158.html">东方财富/财中社</a><span class="source-level l2">二级</span>
+            · <a href="https://finance.sina.com.cn/jjxw/2026-07-17/doc-inihzrtu1347962.shtml">新浪财经</a><span class="source-level l1">一级</span>
+          </div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-title"><span class="rank">3</span>TSMC二季度净利润+77%但资本开支上调至600-640亿美元，股价反跌4%</div>
+          <div class="event-summary">速览：台积电7/16公布Q2净利润NT$706.56亿（约219.9亿美元，同比+77%），EPS 4.31美元超预期13.4%，连续5个季度创纪录；同时将2026营收增速指引从"mid-30%+"上调至"40%+"，资本开支从520-560亿美元上调至600-640亿美元。但股价反跌4%，市场解读为：①资本开支上调意味着自由现金流压缩；②Q3运营利润率指引低于分析师预期约70bp；③管理层警告H2毛利率将低于H1，2nm制程爬坡+海外扩产（亚利桑那1000亿美元计划）将拖累全年毛利率2-3个百分点。</div>
+          <div class="event-source">
+            来源：<a href="https://www.cnbc.com/2026/07/15/stock-market-today-live-updates.html">CNBC</a><span class="source-level l1">一级</span>
+            · <a href="https://stockwirex.com/analysis/tsmc-earnings-record-profit-margin-warning-july-2026/">StockWire X</a><span class="source-level l2">二级</span>
+            · <a href="https://www.ainvest.com/news/tsmc-64-billion-capex-raise-demand-signal-supply-build-2607/">AInvest</a><span class="source-level l2">二级</span>
+          </div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-title"><span class="rank">4</span>韩国散户杠杆爆仓潮：120万账户触保证金追缴、32-36万户被强平</div>
+          <div class="event-summary">速览：7/1-7/13韩国股市强制平仓金额累计达4258亿韩元+3442亿韩元，120万个杠杆账户触及追加保证金线，32-36万个账户被券商全额强平（部分账户负余额仍需还债）。三星/SK海力士单一杠杆ETF较高点跌60-66%，散户保证金存款一个月蒸发20万亿韩元至107万亿。20-30岁年轻散户占爆仓账户62%。韩国金融服务委员会7/14紧急出台《经济危机家庭自杀预防对策》。</div>
+          <div class="event-source">
+            来源：<a href="https://wallstreetcn.com/articles/3776889">华尔街见闻</a><span class="source-level l1">一级</span>
+            · <a href="https://finance.sina.com.cn/roll/2026-07-14/doc-inihtrnc7265066.shtml">新浪财经/华尔街见闻</a><span class="source-level l1">一级</span>
+          </div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-title"><span class="rank">5</span>阿里通义千问Qwen入Apple Intelligence中国版，阿里港股+3%、百度+2.6%</div>
+          <div class="event-summary">速览：7/16国家网信办公布Apple Intelligence通过端侧生成式AI服务备案，阿里确认Qwen模型将整合入iOS/iPadOS/macOS/visionOS中国版；百度确认参与Apple Intelligence搜索功能。阿里港股+3.09%、百度+2.6%，带动恒生科技+1.98%、恒生指数+1.33%（连续5日上涨，收复25000点）。腾讯混元Hy3上线一周API调用量暴涨68倍登顶OpenRouter全球榜首。</div>
+          <div class="event-source">
+            来源：<a href="https://www.cnbc.com/2026/07/16/alibaba-baidu-shares-jump-apple-ai-partnership-.html">CNBC</a><span class="source-level l1">一级</span>
+            · <a href="https://www.tipranks.com/news/baidu-and-alibaba-stocks-gain-in-hong-kong-as-china-approves-apple-intelligence-partnership">TipRanks</a><span class="source-level l1">一级</span>
+            · <a href="https://www.newtimespace.com/en/research/1426778.html">NewTimeSpace</a><span class="source-level l2">二级</span>
+          </div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-title"><span class="rank">6</span>Alphabet旗舰AI模型Gemini 3.5 Pro被曝延迟数月，股价跌4.5%</div>
+          <div class="event-summary">速览：Bloomberg 7/16报道Alphabet旗舰AI模型Gemini 3.5 Pro"较计划延迟数月"，公司5月Google I/O发布的该模型仍需时间提升性能。Alphabet股价跌4.5%，拖累美股"七巨头"集体走弱（仅特斯拉前一日收涨），纳指-1.47%。</div>
+          <div class="event-source">
+            来源：<a href="https://www.investopedia.com/stock-market-today-dow-jones-s-and-p-500-07162026-12020420">Investopedia</a><span class="source-level l1">一级</span>
+            · <a href="https://www.cnbc.com/2026/07/15/stock-market-today-live-updates.html">CNBC</a><span class="source-level l1">一级</span>
+          </div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-title"><span class="rank">7</span>A股高低切换：科技股暴跌消费医药逆势走强，哈药股份5连板</div>
+          <div class="event-summary">速览：7/16 A股出现明显的高低切换，申万一级行业中传媒+1.66%、农林牧渔+1.57%、美容护理+1.23%领涨，建筑材料-4.37%、电子-4.25%、通信-3.61%领跌。哈药股份中报预增后5连板，星网锐捷、亚联机械等低位业绩预喜股涨停；而澜起科技-16.44%、兆易创新跌停、德明利连续2日跌停（前期累涨900%）。万得微盘股指数+1.06%逆势走强。两市成交2.42万亿，连续4日缩量。</div>
+          <div class="event-source">
+            来源：<a href="https://fund.eastmoney.com/a/202607163809001570.html">东方财富/天天基金</a><span class="source-level l1">一级</span>
+            · <a href="https://www.stcn.com/article/detail/4024415.html">证券时报</a><span class="source-level l1">一级</span>
+          </div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-title"><span class="rank">8</span>美伊冲突升级：美军对伊朗发动当日第二波打击，油价上行</div>
+          <div class="event-summary">速览：WSJ报道特朗普倾向于扩大对伊朗的军事行动，美军7/16对伊朗发动当日第二波打击。德黑兰警告可能限制地区能源出口，霍尔木兹海峡风险溢价回升。布伦特原油+0.74%至85.58美元/桶（欧盘）/ 收盘微跌0.8%至84.25美元（美股盘），WTI -0.7%至79美元。黄金-1.8%至3980美元/盎司（风险资产普跌但黄金未获避险买盘）。</div>
+          <div class="event-source">
+            来源：<a href="https://www.lse.co.uk/news/europe-close-stocks-weaker-on-geopolitical-tensions-tech-concerns-u494ew5xrncuem5.html">Sharecast/LSE</a><span class="source-level l1">一级</span>
+            · <a href="https://www.investopedia.com/stock-market-today-dow-jones-s-and-p-500-07162026-12020420">Investopedia</a><span class="source-level l1">一级</span>
+          </div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-title"><span class="rank">9</span>日经225单日暴跌1915点失守67000，半导体股成最大拖累</div>
+          <div class="event-summary">速览：日经225 7/16收盘66,835.54，跌2.79%（-1915.97点），几乎抹平前一日1008点涨幅。东京证交所主板1070只下跌、446只上涨，25日涨跌比率降至120.92%。半导体设备股领跌，TSMC财报未成催化剂，"卖不动就卖"心理蔓延。日经仍受25日均线压制，跌破则可能进入正式调整。</div>
+          <div class="event-source">
+            来源：<a href="https://finance.biggo.com/news/c8870e02-e44c-49be-a9f4-da3fa3069fa1">BigGo Finance</a><span class="source-level l2">二级</span>
+            · <a href="https://blog.econplex.com/economy-news/asia-markets-plunge-bok-rate-hike-kospi-crash-hang-seng-rallies-july-16-2026/">ECONPLEX</a><span class="source-level l2">二级</span>
+          </div>
+        </div>
+
+        <div class="event-item">
+          <div class="event-title"><span class="rank">10</span>长鑫科技今日申购：国产存储龙头拟募资超500亿元</div>
+          <div class="event-summary">速览：中国存储芯片龙头长鑫科技7/16正式启动申购，发行价8.66元/股，计划发行66.88亿股（超额配售权全额行使后76.91亿股），媒体预测中签率0.3%-0.7%，若上市市值达3万亿元则中一签可赚2万多元。董事长朱一明最新发声。在澜起科技被查、半导体板块情绪冰点之际，长鑫科技申购成为市场情绪温度计。</div>
+          <div class="event-source">
+            来源：<a href="https://fund.eastmoney.com/a/202607163809001570.html">东方财富/天天基金</a><span class="source-level l1">一级</span>
+          </div>
         </div>
       </section>
+
+      <section class="module">
+        <h2>⚡ 市场共识与分歧</h2>
+
+        <div class="consensus-box">
+          <div class="box-title">✅ 市场共识</div>
+          <div>半导体股短期回调由"仓位因素+杠杆去化"驱动而非基本面恶化，KOSPI已接近超卖（14日RSI 37.2），高盛等机构维持"选择性买入高确信度存储芯片标的"观点 → ⭐⭐⭐</div>
+        </div>
+
+        <div class="divergence-box">
+          <div class="box-title">⚠️ 核心分歧</div>
+          <div>TSMC资本开支上调至600-640亿美元，是"AI需求强劲信号"还是"供给扩张将压垮毛利率"？</div>
+          <div class="stance-line"><span class="org">看多派（高盛/瑞银等）</span>（看多）：营收增速指引从30%+上调至40%+，连续5季创纪录，AI需求结构性持续，产能短缺将延续至2028下半年</div>
+          <div class="stance-line"><span class="org">看空派（Bears of Wall Street/Seeking Alpha/AInvest）</span>（看空）：资本开支是18-24个月后的供给信号而非当下需求信号；2nm制程爬坡+亚利桑那州1000亿美元扩产将拖累H2 2026毛利率2-3个百分点；内在价值估算$215.66远低于现价；评级Sell</div>
+          <div class="interest-note">💡 利益立场标注：看多机构多为投行销售交易台（向客户推荐买入），看空机构多为独立研究/资管（无持仓利益）；TSMC管理层自身有动力上调指引以支撑再融资估值</div>
+        </div>
+
+        <div class="cross-verify">💡 投研搜索Skill 交叉验证结论：双方分歧本质是"周期顶部vs结构性需求"之争，关键变量是2026 Q4 DRAM/HBM平均售价（ASP）是否下行；目前韩国投资证券预测SK海力士运营利润60.4万亿韩元低于市场一致预期65万亿约8%，已为ASP下行留出预警空间，看空派逻辑更具边际证据支持。</div>
+      </section>
+
+      <section class="module">
+        <h2>🔔 市场噪音</h2>
+        <table class="market-table noise-table">
+          <thead>
+            <tr><th>噪音内容</th><th>热度</th><th>核实结论</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>"华尔街四步绞杀论"：称华尔街有预谋做空韩股，先养肥（拉KOSPI到9385点）→架刀（SK海力士ADR登陆纳斯达克）→收割（外资出逃1100亿美元）→反向逼空（一夜拉ADR 27%）双向收割</td>
+              <td class="heat">高</td>
+              <td>无证据支持"预谋"——高盛自家7/14报告明确将下跌定性为"流动性驱动的仓位清洗"而非基本面或阴谋；外资净卖出88%集中于科技板块是因仓位过重而非定向做空；SK海力士ADR上市是公司主动选择消除"韩国折价"，非华尔街设局。<a href="https://wallstreetcn.com/articles/3776861">华尔街见闻/高盛报告</a></td>
+            </tr>
+            <tr>
+              <td>"澜起科技被查=公司有罪，股价还要再跌50%"——雪球部分KOL言论</td>
+              <td class="heat">中</td>
+              <td>韩国检方目前仅是"调查取证阶段，未指控任何不当行为"（公司7/16公告原文）；历史上韩国公平交易委员会反垄断调查周期通常6-18个月，且澜起上半年净利润预增63.9-81.2%、董事长提议回购3-6亿元，基本面无恶化。<a href="https://finance.sina.com.cn/jjxw/2026-07-17/doc-inihzrtu1347962.shtml">新浪财经/公司公告</a></td>
+            </tr>
+            <tr>
+              <td>"韩国年轻人排队上天台、爆仓致社会动荡"——部分中文自媒体渲染</td>
+              <td class="heat">中</td>
+              <td>确有32-36万户被强平、20-30岁占62%，但"排队上天台"系借用2015年A股股灾网络梗的渲染；韩国政府7/14已出台《经济危机家庭自杀预防对策》提供债务调整援助，未出现系统性社会动荡。<a href="https://wallstreetcn.com/articles/3776889">华尔街见闻</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="module">
+        <h2>📅 今日关注</h2>
+        <div class="focus-item">
+          <div class="focus-event">• 日本6月CPI（7/17盘中公布）：市场预期同比+3.4%，前值+3.2%</div>
+          <div class="focus-threshold">关键阈值参考（来源：ING）：CPI≥3.6% → 日债收益率上行、日经进一步承压；CPI≤3.0% → 日元走弱、日经反弹</div>
+        </div>
+        <div class="focus-item">
+          <div class="focus-event">• 欧央行7月利率决议（7/17 20:15 北京时间）：市场预期维持3.25%不变</div>
+          <div class="focus-threshold">关键阈值参考（来源：LSEG）：若欧央行释放9月降息信号 → DAX/CAC短期反弹1-2%；若强调"通胀粘性因油价" → 欧元/美元升至1.15+</div>
+        </div>
+        <div class="focus-item">
+          <div class="focus-event">• A股7月LPR报价（7/17 9:15）：1年期/5年期预期均维持3.0%/3.5%不变</div>
+          <div class="focus-threshold">关键阈值参考（来源：中金）：若1年期LPR非对称下调5bp → 银行股承压、地产股反弹；若维持不变 → 市场聚焦7月下旬政治局会议</div>
+        </div>
+        <div class="focus-item">
+          <div class="focus-event">• 韩国金融监督院"F4会议"（7/17）：审议单股杠杆ETF管控措施</div>
+          <div class="focus-threshold">关键阈值参考（来源：韩国金融监督院）：若提高杠杆ETF保证金比例至50%+ → 短期KOSPI进一步去杠杆-2~3%；若仅限适合度评估 → 影响可控</div>
+        </div>
+      </section>
+
+      <div class="brief-footer">
+        ⚠️ 研究局限声明：本晨报基于公开信息整理，不构成投资建议。A股宽基成交量三维数据因 iFinD MCP 不支持指数查询、东方财富源未提供完整历史成交量序列，本次仅展示收盘价三维，待自动化执行时切换至 iFinD 完整版或 mx-finance-data skill 补全。
+        <div class="tool-usage">
+          ✅ 本次使用的搜索工具：
+          EXA <span class="yes">✅</span>（实际使用 mcp__anysearch__search）
+          · AnySearch <span class="yes">✅</span>
+          · 行情数据源：EXA搜索 · 市场总结（兜底方案，iFinD 因不支持指数降级）
+        </div>
+      </div>
     </article>
 
   </div>
