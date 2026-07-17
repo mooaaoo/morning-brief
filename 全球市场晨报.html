@@ -207,7 +207,7 @@
         <div class="module-subtitle">
           <span class="tag-close">主表 · A股宽基六维</span>
           <span class="tag-vol">成交量三维</span>
-          收盘价日/月/年涨跌 + 成交量日/周/月涨跌，按上一日收盘价日涨跌幅从高到低排列
+          收盘价日/月/年涨跌 + 成交量日/周/月涨跌（按约定顺序排列）
         </div>
         <table class="sixdim-table">
           <thead>
@@ -227,19 +227,14 @@
           </thead>
           <tbody>
             <tr>
-              <td class="col-name">上证50</td>
-              <td class="green">-2.63%</td><td class="green">-3.64%</td><td class="green">-3.20%</td>
-              <td class="divider red">+27.51%</td><td class="red">+18.40%</td><td class="red">+33.58%</td>
-            </tr>
-            <tr>
               <td class="col-name">上证指数</td>
               <td class="green">-3.05%</td><td class="green">-8.37%</td><td class="green">-7.48%</td>
               <td class="divider red">+21.52%</td><td class="red">+3.67%</td><td class="red">+6.97%</td>
             </tr>
             <tr>
-              <td class="col-name">沪深300</td>
-              <td class="green">-3.60%</td><td class="green">-8.16%</td><td class="green">-7.42%</td>
-              <td class="divider red">+20.30%</td><td class="green">-0.49%</td><td class="red">+9.63%</td>
+              <td class="col-name">深证成指</td>
+              <td class="green">-5.40%</td><td class="green">-13.69%</td><td class="green">-12.00%</td>
+              <td class="divider red">+14.70%</td><td class="green">-7.82%</td><td class="red">+2.39%</td>
             </tr>
             <tr>
               <td class="col-name">国证A股(全市场)</td>
@@ -247,9 +242,24 @@
               <td class="divider red">+19.90%</td><td class="green">-5.06%</td><td class="red">+4.73%</td>
             </tr>
             <tr>
-              <td class="col-name">深证成指</td>
-              <td class="green">-5.40%</td><td class="green">-13.69%</td><td class="green">-12.00%</td>
-              <td class="divider red">+14.70%</td><td class="green">-7.82%</td><td class="red">+2.39%</td>
+              <td class="col-name">创业板指</td>
+              <td class="green">-7.15%</td><td class="green">-17.72%</td><td class="green">-15.09%</td>
+              <td class="divider red">+16.01%</td><td class="green">-7.26%</td><td class="red">+3.77%</td>
+            </tr>
+            <tr>
+              <td class="col-name">科创50</td>
+              <td class="green">-7.12%</td><td class="green">-6.81%</td><td class="green">-2.05%</td>
+              <td class="divider red">+16.89%</td><td class="green">-27.93%</td><td class="green">-7.71%</td>
+            </tr>
+            <tr>
+              <td class="col-name">上证50</td>
+              <td class="green">-2.63%</td><td class="green">-3.64%</td><td class="green">-3.20%</td>
+              <td class="divider red">+27.51%</td><td class="red">+18.40%</td><td class="red">+33.58%</td>
+            </tr>
+            <tr>
+              <td class="col-name">沪深300</td>
+              <td class="green">-3.60%</td><td class="green">-8.16%</td><td class="green">-7.42%</td>
+              <td class="divider red">+20.30%</td><td class="green">-0.49%</td><td class="red">+9.63%</td>
             </tr>
             <tr>
               <td class="col-name">中证500</td>
@@ -266,21 +276,16 @@
               <td class="green">-6.16%</td><td class="green">-17.62%</td><td class="green">-15.44%</td>
               <td class="divider red">+18.62%</td><td class="green">-2.13%</td><td class="red">+0.17%</td>
             </tr>
-            <tr>
-              <td class="col-name">科创50</td>
-              <td class="green">-7.12%</td><td class="green">-6.81%</td><td class="green">-2.05%</td>
-              <td class="divider red">+16.89%</td><td class="green">-27.93%</td><td class="green">-7.71%</td>
-            </tr>
-            <tr>
-              <td class="col-name">创业板指</td>
-              <td class="green">-7.15%</td><td class="green">-17.72%</td><td class="green">-15.09%</td>
-              <td class="divider red">+16.01%</td><td class="green">-7.26%</td><td class="red">+3.77%</td>
-            </tr>
           </tbody>
         </table>
+        <div class="data-source" style="margin-top:10px;">数据来源：新浪财经 K线 API（Vibe-Research a-stock-data 兜底方案，2026-07-17 收盘）· 涨红跌绿</div>
+
+        <div class="module-comment" style="margin-top:14px;background:#fdf6ec;padding:10px 14px;border-left:3px solid #d35400;border-radius:4px;">
+          <strong>💡 A股宽基六维情绪总结：</strong>A股7/17全线重挫，10只宽基全部放量杀跌（成交量日涨14-27%），典型的<strong>恐慌性抛售</strong>特征。<strong>风格分化明显</strong>：上证50跌幅最小(-2.63%)且成交量月涨33.58%，蓝筹防御性获资金认可，成为避风港；创业板(-7.15%)、科创50(-7.12%)领跌，科技股集中营遭集中抛售。<strong>中小盘已进入技术性熊市</strong>：中证1000/国证2000 月跌超17%、年跌超14%，且成交量月涨仅0-5%（承接力弱），弱势格局短期难反转。<strong>科创50量价背离警示</strong>：日跌7.12%但成交量周缩27.93%、月缩7.71%，反映资金持续流出且无新增承接，后市仍承压。<strong>整体情绪</strong>：风险传导大于基本面恶化，但放量杀跌尚未结束，短期需关注创业板3300/科创50 1700 关键支撑。
+        </div>
 
         <div class="module-subtitle" style="margin-top:18px;">
-          次表 · 15全球权益指数简表（收盘值/日/月/年）
+          次表 · 15全球权益指数简表（收盘值/日/月/年，按区域重排：美股→日韩→上证→港股→欧股→新兴市场）
         </div>
         <table class="market-table">
           <thead>
@@ -293,24 +298,28 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td>越南胡志明</td>  <td>1,804.24</td><td class="red">+1.24%</td><td class="green">-2.10%</td><td class="red">+12.30%</td></tr>
+            <tr><td>道琼斯</td>      <td>52,552.97</td><td class="green">-0.20%</td><td class="red">+1.80%</td><td class="red">+11.20%</td></tr>
+            <tr><td>标普500</td>     <td>7,533.77</td><td class="green">-0.51%</td><td class="red">+0.90%</td><td class="red">+13.40%</td></tr>
+            <tr><td>纳斯达克</td>    <td>25,881.95</td><td class="green">-1.47%</td><td class="green">-2.30%</td><td class="red">+16.80%</td></tr>
+            <tr><td>韩国KOSPI</td>   <td>6,820.60</td><td class="green">-6.37%</td><td class="green">-13.50%</td><td class="red">+9.80%</td></tr>
+            <tr><td>日经225</td>     <td>66,835.54</td><td class="green">-2.79%</td><td class="green">-6.40%</td><td class="red">+10.20%</td></tr>
+            <tr><td>台湾加权</td>    <td>45,624.98</td><td class="green">-0.01%</td><td class="green">-4.20%</td><td class="red">+14.50%</td></tr>
+            <tr><td>上证指数</td>    <td>3,764.16</td><td class="green">-3.05%</td><td class="green">-8.37%</td><td class="green">-7.48%</td></tr>
             <tr><td>恒生指数</td>    <td>25,008.60</td><td class="red">+1.33%</td><td class="red">+3.40%</td><td class="red">+18.50%</td></tr>
             <tr><td>恒生科技</td>    <td>4,834.44</td><td class="red">+1.98%</td><td class="red">+4.80%</td><td class="red">+22.10%</td></tr>
             <tr><td>英国富时100</td> <td>10,572.24</td><td class="red">+0.54%</td><td class="red">+1.20%</td><td class="red">+8.40%</td></tr>
-            <tr><td>印度NIFTY50</td> <td>24,072.75</td><td class="green">-0.02%</td><td class="green">-1.50%</td><td class="red">+5.20%</td></tr>
             <tr><td>法国CAC40</td>   <td>8,363.09</td><td class="green">-0.23%</td><td class="green">-1.80%</td><td class="red">+6.10%</td></tr>
             <tr><td>德国DAX</td>     <td>24,866.46</td><td class="green">-0.53%</td><td class="green">-2.10%</td><td class="red">+9.30%</td></tr>
+            <tr><td>印度NIFTY50</td> <td>24,072.75</td><td class="green">-0.02%</td><td class="green">-1.50%</td><td class="red">+5.20%</td></tr>
             <tr><td>巴西IBOVESPA</td><td>176,010.90</td><td class="green">-0.36%</td><td class="green">-3.20%</td><td class="red">+15.70%</td></tr>
-            <tr><td>道琼斯</td>      <td>52,552.97</td><td class="green">-0.20%</td><td class="red">+1.80%</td><td class="red">+11.20%</td></tr>
-            <tr><td>标普500</td>     <td>7,533.77</td><td class="green">-0.51%</td><td class="red">+0.90%</td><td class="red">+13.40%</td></tr>
-            <tr><td>台湾加权</td>    <td>45,624.98</td><td class="green">-0.01%</td><td class="green">-4.20%</td><td class="red">+14.50%</td></tr>
-            <tr><td>纳斯达克</td>    <td>25,881.95</td><td class="green">-1.47%</td><td class="green">-2.30%</td><td class="red">+16.80%</td></tr>
-            <tr><td>日经225</td>     <td>66,835.54</td><td class="green">-2.79%</td><td class="green">-6.40%</td><td class="red">+10.20%</td></tr>
-            <tr><td>韩国KOSPI</td>   <td>6,820.60</td><td class="green">-6.37%</td><td class="green">-13.50%</td><td class="red">+9.80%</td></tr>
-            <tr><td>上证指数</td>    <td>3,764.16</td><td class="green">-3.05%</td><td class="green">-8.37%</td><td class="green">-7.48%</td></tr>
+            <tr><td>越南胡志明</td>  <td>1,804.24</td><td class="red">+1.24%</td><td class="green">-2.10%</td><td class="red">+12.30%</td></tr>
           </tbody>
         </table>
-        <div class="data-source">数据来源：A股宽基六维来自 新浪财经 API（quotes.sina.cn，Vibe-Research a-stock-data 兜底方案，2026-07-17 收盘）· 15全球权益指数来自 EXA搜索 · 新华财经/AP/CNBC/Investopedia/Sharecast/Reuters/Seoul Economic Daily/ECONPLEX/Economic Times/RioTimes/Vietnam.vn · 各资产按其交易时间更新至最新收盘 · 涨红跌绿</div>
+        <div class="data-source" style="margin-top:10px;">数据来源：EXA搜索 · AP/CNBC/Investopedia/Sharecast/Reuters/Seoul Economic Daily/ECONPLEX/Economic Times/RioTimes/Vietnam.vn · 各资产按其交易时间更新至最新收盘 · 涨红跌绿</div>
+
+        <div class="module-comment" style="margin-top:14px;background:#fdf6ec;padding:10px 14px;border-left:3px solid #d35400;border-radius:4px;">
+          <strong>💡 全球权益指数情绪总结：</strong>全球市场呈现<strong>"科技股灾+防御股抗跌+港股独立行情"</strong>三极分化格局。<strong>美股</strong>：道指仅-0.20%、标普-0.51%，但纳指-1.47%，半导体拖累科技股，资金向防御板块轮动，美股情绪"分化偏弱"。<strong>日韩台</strong>：韩股-6.37%熔断（年内第8次）+ 日经-2.79% + 台湾加权-0.01%几乎持平，亚太科技股灾中心，<strong>极度恐慌</strong>，韩股散户杠杆爆仓潮加剧抛售螺旋。<strong>上证</strong>：-3.05%放量杀跌，作为亚洲第二大市场被风险传导拖累，但跌幅小于韩日，<strong>相对韧性</strong>。<strong>港股</strong>：恒生+1.33%、恒生科技+1.98%逆势走强，阿里通义千问入Apple Intelligence中国版成独立催化，<strong>独立行情</strong>，是亚太唯一避风港。<strong>欧股</strong>：英富时100+0.54%（防御性强+英镑走弱利好出口），法德股市小幅下跌，欧洲"低波动分化"。<strong>新兴市场</strong>：印度Nifty几乎持平、巴西-0.36%、越南+1.24%，新兴市场整体抗跌，<strong>风险隔离度较高</strong>。<strong>整体情绪</strong>：全球风险偏好显著回落，但并未全面崩盘，资金从科技股向防御资产+中国AI主题+新兴市场轮动。
+        </div>
       </section>
 
       <section class="module">
