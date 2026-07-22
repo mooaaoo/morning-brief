@@ -503,25 +503,22 @@
     #auth-gate .auth-error { color: #d44; font-size: 12px; margin-top: 10px; min-height: 16px; }
     body.authed #auth-gate { display: none; }
     body:not(.authed) .container { display: none; }
-
-    /* 成交量柱状图 */
-    .vol-bar-table td:nth-child(6) { min-width: 80px; }
-    .vol-bar {
-      width: 100%;
-      height: 20px;
-      background: #f0ebe0;
-      border-radius: 10px;
-      overflow: hidden;
+    /* ETF份额变动表 */
+    .etf-table .subtotal-row td {
+      background: #fdf6ec;
+      font-weight: 600;
+      border-top: 2px solid #d35400;
     }
-    .vol-bar-fill {
-      height: 100%;
-      border-radius: 10px;
-      transition: width 0.3s ease;
+    .etf-table .total-row td {
+      background: #d35400;
+      color: #fff;
+      font-weight: 700;
     }
+    .etf-table .total-row td strong { color: #fff; }
+    .etf-table .total-row td.red { color: #fff; }
     @media (max-width: 768px) {
-      .vol-bar { height: 16px; }
-      .vol-bar-table { font-size: 11px; }
-      .vol-bar-table th, .vol-bar-table td { padding: 5px 4px; }
+      .etf-table { font-size: 11px; }
+      .etf-table th, .etf-table td { padding: 5px 4px; }
     }
   </style>
 </head>
@@ -687,71 +684,73 @@
         </table>
 
         <div class="module-subtitle" style="margin-top:18px;">
-          <span class="tag-vol">表3 · 成交量可视化</span>
-          当日成交量(亿股) + 日/周/月涨跌 + 柱状图
+          <span class="tag-vol">表3 · 宽基ETF份额变动</span>
+          最新规模(亿元) + 当日净流入(亿元) + 近3日净流入(亿元) + 近5日净流入(亿元)，按宽基分组加总
         </div>
-        <table class="market-table vol-bar-table">
+        <table class="market-table etf-table">
           <thead>
             <tr>
-              <th>指数</th>
-              <th>成交量(亿股)</th>
-              <th>日涨跌</th>
-              <th>周涨跌</th>
-              <th>月涨跌</th>
-              <th>可视化</th>
+              <th>ETF名称</th>
+              <th>代码</th>
+              <th>最新规模(亿)</th>
+              <th>当日净流入(亿)</th>
+              <th>近3日净流入(亿)</th>
+              <th>近5日净流入(亿)</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>上证指数</td><td>735.02</td>
-              <td class="red">+3.64%</td><td class="red">+26.73%</td><td class="red">+22.83%</td>
-              <td><div class="vol-bar" style="width:100%"><div class="vol-bar-fill" style="width:100%;background:#d35400"></div></div></td>
-            </tr>
-            <tr>
-              <td>深证成指</td><td>835.91</td>
-              <td class="red">+8.16%</td><td class="red">+23.88%</td><td class="red">+12.27%</td>
-              <td><div class="vol-bar" style="width:100%"><div class="vol-bar-fill" style="width:100%;background:#d35400"></div></div></td>
-            </tr>
-            <tr>
-              <td>国证A股</td><td>713.47</td>
-              <td class="red">+5.47%</td><td class="red">+21.85%</td><td class="red">+13.32%</td>
-              <td><div class="vol-bar" style="width:100%"><div class="vol-bar-fill" style="width:85%;background:#d35400"></div></div></td>
-            </tr>
-            <tr>
-              <td>创业板指</td><td>266.04</td>
-              <td class="red">+9.17%</td><td class="red">+32.00%</td><td class="red">+16.01%</td>
-              <td><div class="vol-bar" style="width:100%"><div class="vol-bar-fill" style="width:32%;background:#d35400"></div></div></td>
-            </tr>
-            <tr>
-              <td>科创50</td><td>19.51</td>
-              <td class="red">+8.50%</td><td class="red">+21.85%</td><td class="green">-0.54%</td>
-              <td><div class="vol-bar" style="width:100%"><div class="vol-bar-fill" style="width:2%;background:#2a9d4a"></div></div></td>
-            </tr>
-            <tr>
-              <td>上证50</td><td>81.85</td>
-              <td class="green">-8.07%</td><td class="red">+22.16%</td><td class="red">+36.14%</td>
-              <td><div class="vol-bar" style="width:100%"><div class="vol-bar-fill" style="width:10%;background:#2a9d4a"></div></div></td>
-            </tr>
-            <tr>
-              <td>沪深300</td><td>345.40</td>
-              <td class="red">+3.69%</td><td class="red">+21.94%</td><td class="red">+12.82%</td>
-              <td><div class="vol-bar" style="width:100%"><div class="vol-bar-fill" style="width:41%;background:#d35400"></div></div></td>
-            </tr>
-            <tr>
-              <td>中证500</td><td>268.38</td>
-              <td class="red">+5.76%</td><td class="red">+24.34%</td><td class="red">+19.64%</td>
-              <td><div class="vol-bar" style="width:100%"><div class="vol-bar-fill" style="width:32%;background:#d35400"></div></div></td>
-            </tr>
-            <tr>
-              <td>中证1000</td><td>334.99</td>
-              <td class="red">+8.70%</td><td class="red">+30.91%</td><td class="red">+20.02%</td>
-              <td><div class="vol-bar" style="width:100%"><div class="vol-bar-fill" style="width:40%;background:#d35400"></div></div></td>
-            </tr>
-            <tr>
-              <td>国证2000</td><td>482.61</td>
-              <td class="red">+7.87%</td><td class="red">+31.36%</td><td class="red">+17.02%</td>
-              <td><div class="vol-bar" style="width:100%"><div class="vol-bar-fill" style="width:58%;background:#d35400"></div></div></td>
-            </tr>
+            <!-- 上证50ETF -->
+            <tr><td>华夏上证50ETF</td><td>510050</td><td>251.06</td><td class="red">+2.53</td><td class="neutral">—</td><td class="red">+57.96</td></tr>
+            <tr class="subtotal-row"><td colspan="3"><strong>上证50ETF合计</strong></td><td class="red"><strong>+2.53</strong></td><td>—</td><td class="red"><strong>+57.96</strong></td></tr>
+
+            <!-- 沪深300ETF -->
+            <tr><td>华泰柏瑞沪深300ETF</td><td>510300</td><td>1,135.92</td><td class="red">+125.22</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr><td>易方达沪深300ETF</td><td>510310</td><td>497.73</td><td class="red">+17.92</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr><td>华夏沪深300ETF</td><td>510330</td><td>406.66</td><td class="red">+6.48</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr><td>嘉实沪深300ETF</td><td>159919</td><td>309.29</td><td class="red">+6.54</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr><td>华安沪深300ETF</td><td>515390</td><td>24.93</td><td class="red">+4.58</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr><td>富国沪深300ETF</td><td>159300</td><td>20.64</td><td class="red">+2.91</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr class="subtotal-row"><td colspan="3"><strong>沪深300ETF合计</strong></td><td class="red"><strong>+163.65</strong></td><td>—</td><td>—</td></tr>
+
+            <!-- 中证500ETF -->
+            <tr><td>南方中证500ETF</td><td>510500</td><td>457.57</td><td class="red">+18.53</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr class="subtotal-row"><td colspan="3"><strong>中证500ETF合计</strong></td><td class="red"><strong>+18.53</strong></td><td>—</td><td>—</td></tr>
+
+            <!-- 中证1000ETF -->
+            <tr><td>南方中证1000ETF</td><td>512100</td><td>294.59</td><td class="red">+20.12</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr><td>广发中证1000ETF</td><td>560010</td><td>61.66</td><td class="red">+5.50</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr><td>易方达中证1000ETF</td><td>159633</td><td>52.60</td><td class="red">+6.84</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr><td>富国中证1000ETF</td><td>159629</td><td>26.25</td><td class="red">+3.63</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr class="subtotal-row"><td colspan="3"><strong>中证1000ETF合计</strong></td><td class="red"><strong>+36.09</strong></td><td>—</td><td>—</td></tr>
+
+            <!-- 创业板ETF -->
+            <tr><td>易方达创业板ETF</td><td>159915</td><td>611.35</td><td class="red">+93.97</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr><td>华安创业板50ETF</td><td>159949</td><td>219.05</td><td class="red">+8.82</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr class="subtotal-row"><td colspan="3"><strong>创业板ETF合计</strong></td><td class="red"><strong>+102.79</strong></td><td>—</td><td>—</td></tr>
+
+            <!-- 科创50ETF -->
+            <tr><td>华夏科创50ETF</td><td>588000</td><td>816.60</td><td class="red">+137.01</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr><td>易方达科创50ETF</td><td>588080</td><td>398.37</td><td class="red">+10.76</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr class="subtotal-row"><td colspan="3"><strong>科创50ETF合计</strong></td><td class="red"><strong>+147.77</strong></td><td>—</td><td>—</td></tr>
+
+            <!-- 上证指数ETF -->
+            <tr><td>富国上证综指ETF</td><td>510210</td><td>174.68</td><td class="red">+11.82</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr class="subtotal-row"><td colspan="3"><strong>上证指数ETF合计</strong></td><td class="red"><strong>+11.82</strong></td><td>—</td><td>—</td></tr>
+
+            <!-- 中证2000ETF -->
+            <tr><td>华泰柏瑞中证2000ETF</td><td>563300</td><td>42.67</td><td class="red">+5.64</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr class="subtotal-row"><td colspan="3"><strong>中证2000ETF合计</strong></td><td class="red"><strong>+5.64</strong></td><td>—</td><td>—</td></tr>
+
+            <!-- A500ETF（国证A股代理） -->
+            <tr><td>南方中证A500ETF</td><td>159352</td><td>304.23</td><td class="red">+10.30</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr><td>华泰柏瑞中证A500ETF</td><td>563360</td><td>341.54</td><td class="red">+9.85</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr><td>易方达中证A500ETF</td><td>159361</td><td>258.07</td><td class="red">+8.16</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr><td>国泰中证A500ETF</td><td>159338</td><td>253.78</td><td class="red">+5.69</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr><td>华夏中证A500ETF</td><td>512050</td><td>190.93</td><td class="red">+5.34</td><td class="neutral">—</td><td class="neutral">—</td></tr>
+            <tr class="subtotal-row"><td colspan="3"><strong>A500ETF合计</strong></td><td class="red"><strong>+39.34</strong></td><td>—</td><td>—</td></tr>
+
+            <!-- 总计 -->
+            <tr class="total-row"><td colspan="3"><strong>全部宽基ETF合计</strong></td><td class="red"><strong>+528.16</strong></td><td>—</td><td class="red"><strong>+57.96</strong></td></tr>
           </tbody>
         </table>
         <div class="data-source">数据来源：新浪财经K线API（收盘价+成交量）+ fuyao MCP快照（成交额）· 2026-07-21 收盘 · 月涨跌以2026-06-30收盘为基准 · 年涨跌以2025-12-31收盘为基准(YTD) · 涨红跌绿</div>
