@@ -503,6 +503,26 @@
     #auth-gate .auth-error { color: #d44; font-size: 12px; margin-top: 10px; min-height: 16px; }
     body.authed #auth-gate { display: none; }
     body:not(.authed) .container { display: none; }
+
+    /* 成交量柱状图 */
+    .vol-bar-table td:nth-child(6) { min-width: 80px; }
+    .vol-bar {
+      width: 100%;
+      height: 20px;
+      background: #f0ebe0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .vol-bar-fill {
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.3s ease;
+    }
+    @media (max-width: 768px) {
+      .vol-bar { height: 16px; }
+      .vol-bar-table { font-size: 11px; }
+      .vol-bar-table th, .vol-bar-table td { padding: 5px 4px; }
+    }
   </style>
 </head>
 <body>
@@ -611,98 +631,126 @@
         <div class="module-comment">7/21 A股暴力反弹！科创50+10.73%创近一年最大单日涨幅，创业板+7.05%，半导体产业链全线爆发，14只"地天板"（12只科技股）。成交额2.96万亿放量2550亿。证监会吴清座谈+央企增持150亿+险企表态成反弹催化。美股AI股反弹（纳指+1.29%），但Brent油价飙至$91创新高。</div>
 
         <div class="module-subtitle">
-          <span class="tag-close">主表 · A股宽基六维</span>
-          <span class="tag-vol">成交额+成交量三维</span>
-          收盘价 + 成交额(亿元) + 收盘价日/月/年涨跌 + 成交量日/周/月涨跌（月涨跌=6-30基准，年涨跌=YTD基准）
+          <span class="tag-close">表1 · 收盘价与涨跌</span>
+          收盘价 + 日/月/年涨跌（月涨跌=6-30基准，年涨跌=YTD基准）
         </div>
-        <table class="sixdim-table">
+        <table class="market-table">
           <thead>
             <tr>
-              <th rowspan="2" class="col-name">指数</th>
-              <th rowspan="2" class="col-name">收盘价</th>
-              <th colspan="3" class="group-header group-close">收盘价涨跌（橙）</th>
-              <th rowspan="2" class="col-name">成交额(亿)</th>
-              <th colspan="3" class="group-header group-vol">成交量涨跌（蓝）</th>
+              <th>指数</th>
+              <th>收盘价</th>
+              <th>日涨跌</th>
+              <th>月涨跌</th>
+              <th>年涨跌</th>
             </tr>
+          </thead>
+          <tbody>
+            <tr><td>上证指数</td><td>3,864.37</td><td class="red">+1.79%</td><td class="green">-5.62%</td><td class="green">-2.63%</td></tr>
+            <tr><td>深证成指</td><td>14,264.29</td><td class="red">+4.81%</td><td class="green">-11.98%</td><td class="red">+5.47%</td></tr>
+            <tr><td>国证A股</td><td>5,062.14</td><td class="red">+3.66%</td><td class="green">-8.47%</td><td class="red">+2.10%</td></tr>
+            <tr><td>创业板指</td><td>3,685.97</td><td class="red">+7.05%</td><td class="green">-15.12%</td><td class="red">+15.07%</td></tr>
+            <tr><td>科创50</td><td>1,903.16</td><td class="red">+10.73%</td><td class="green">-13.80%</td><td class="red">+41.58%</td></tr>
+            <tr><td>上证50</td><td>2,973.81</td><td class="red">+2.09%</td><td class="green">-0.52%</td><td class="green">-1.89%</td></tr>
+            <tr><td>沪深300</td><td>4,739.23</td><td class="red">+3.06%</td><td class="green">-4.82%</td><td class="red">+2.36%</td></tr>
+            <tr><td>中证500</td><td>7,800.61</td><td class="red">+5.25%</td><td class="green">-13.63%</td><td class="red">+4.49%</td></tr>
+            <tr><td>中证1000</td><td>7,259.86</td><td class="red">+4.23%</td><td class="green">-17.59%</td><td class="green">-4.42%</td></tr>
+            <tr><td>国证2000</td><td>9,305.66</td><td class="red">+3.59%</td><td class="green">-17.91%</td><td class="green">-6.53%</td></tr>
+          </tbody>
+        </table>
+
+        <div class="module-subtitle" style="margin-top:18px;">
+          <span class="tag-vol">表2 · 成交额与成交量涨跌</span>
+          成交额(亿元) + 成交量日/周/月涨跌
+        </div>
+        <table class="market-table">
+          <thead>
             <tr>
-              <th class="group-close">日涨跌</th>
-              <th class="group-close">月涨跌</th>
-              <th class="group-close">年涨跌</th>
-              <th class="group-vol">日涨跌</th>
-              <th class="group-vol">周涨跌</th>
-              <th class="group-vol">月涨跌</th>
+              <th>指数</th>
+              <th>成交额(亿)</th>
+              <th>量日涨跌</th>
+              <th>量周涨跌</th>
+              <th>量月涨跌</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>上证指数</td><td>13,965</td><td class="red">+3.64%</td><td class="red">+26.73%</td><td class="red">+22.83%</td></tr>
+            <tr><td>深证成指</td><td>15,606</td><td class="red">+8.16%</td><td class="red">+23.88%</td><td class="red">+12.27%</td></tr>
+            <tr><td>国证A股</td><td>18,581</td><td class="red">+5.47%</td><td class="red">+21.85%</td><td class="red">+13.32%</td></tr>
+            <tr><td>创业板指</td><td>7,451</td><td class="red">+9.17%</td><td class="red">+32.00%</td><td class="red">+16.01%</td></tr>
+            <tr><td>科创50</td><td>2,131</td><td class="red">+8.50%</td><td class="red">+21.85%</td><td class="green">-0.54%</td></tr>
+            <tr><td>上证50</td><td>2,918</td><td class="green">-8.07%</td><td class="red">+22.16%</td><td class="red">+36.14%</td></tr>
+            <tr><td>沪深300</td><td>10,167</td><td class="red">+3.69%</td><td class="red">+21.94%</td><td class="red">+12.82%</td></tr>
+            <tr><td>中证500</td><td>6,070</td><td class="red">+5.76%</td><td class="red">+24.34%</td><td class="red">+19.64%</td></tr>
+            <tr><td>中证1000</td><td>5,729</td><td class="red">+8.70%</td><td class="red">+30.91%</td><td class="red">+20.02%</td></tr>
+            <tr><td>国证2000</td><td>7,466</td><td class="red">+7.87%</td><td class="red">+31.36%</td><td class="red">+17.02%</td></tr>
+          </tbody>
+        </table>
+
+        <div class="module-subtitle" style="margin-top:18px;">
+          <span class="tag-vol">表3 · 成交量可视化</span>
+          当日成交量(亿股) + 日/周/月涨跌 + 柱状图
+        </div>
+        <table class="market-table vol-bar-table">
+          <thead>
+            <tr>
+              <th>指数</th>
+              <th>成交量(亿股)</th>
+              <th>日涨跌</th>
+              <th>周涨跌</th>
+              <th>月涨跌</th>
+              <th>可视化</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td class="col-name">上证指数</td>
-              <td class="col-close">3,864.37</td>
-              <td class="red">+1.79%</td><td class="green">-5.62%</td><td class="green">-2.63%</td>
-              <td class="divider col-vol">13,965</td>
+              <td>上证指数</td><td>735.02</td>
               <td class="red">+3.64%</td><td class="red">+26.73%</td><td class="red">+22.83%</td>
+              <td><div class="vol-bar" style="width:100%"><div class="vol-bar-fill" style="width:100%;background:#d35400"></div></div></td>
             </tr>
             <tr>
-              <td class="col-name">深证成指</td>
-              <td class="col-close">14,264.29</td>
-              <td class="red">+4.81%</td><td class="green">-11.98%</td><td class="red">+5.47%</td>
-              <td class="divider col-vol">15,606</td>
+              <td>深证成指</td><td>835.91</td>
               <td class="red">+8.16%</td><td class="red">+23.88%</td><td class="red">+12.27%</td>
+              <td><div class="vol-bar" style="width:100%"><div class="vol-bar-fill" style="width:100%;background:#d35400"></div></div></td>
             </tr>
             <tr>
-              <td class="col-name">国证A股</td>
-              <td class="col-close">5,062.14</td>
-              <td class="red">+3.66%</td><td class="green">-8.47%</td><td class="red">+2.10%</td>
-              <td class="divider col-vol">18,581</td>
+              <td>国证A股</td><td>713.47</td>
               <td class="red">+5.47%</td><td class="red">+21.85%</td><td class="red">+13.32%</td>
+              <td><div class="vol-bar" style="width:100%"><div class="vol-bar-fill" style="width:85%;background:#d35400"></div></div></td>
             </tr>
             <tr>
-              <td class="col-name">创业板指</td>
-              <td class="col-close">3,685.97</td>
-              <td class="red">+7.05%</td><td class="green">-15.12%</td><td class="red">+15.07%</td>
-              <td class="divider col-vol">7,451</td>
+              <td>创业板指</td><td>266.04</td>
               <td class="red">+9.17%</td><td class="red">+32.00%</td><td class="red">+16.01%</td>
+              <td><div class="vol-bar" style="width:100%"><div class="vol-bar-fill" style="width:32%;background:#d35400"></div></div></td>
             </tr>
             <tr>
-              <td class="col-name">科创50</td>
-              <td class="col-close">1,903.16</td>
-              <td class="red">+10.73%</td><td class="green">-13.80%</td><td class="red">+41.58%</td>
-              <td class="divider col-vol">2,131</td>
+              <td>科创50</td><td>19.51</td>
               <td class="red">+8.50%</td><td class="red">+21.85%</td><td class="green">-0.54%</td>
+              <td><div class="vol-bar" style="width:100%"><div class="vol-bar-fill" style="width:2%;background:#2a9d4a"></div></div></td>
             </tr>
             <tr>
-              <td class="col-name">上证50</td>
-              <td class="col-close">2,973.81</td>
-              <td class="red">+2.09%</td><td class="green">-0.52%</td><td class="green">-1.89%</td>
-              <td class="divider col-vol">2,918</td>
+              <td>上证50</td><td>81.85</td>
               <td class="green">-8.07%</td><td class="red">+22.16%</td><td class="red">+36.14%</td>
+              <td><div class="vol-bar" style="width:100%"><div class="vol-bar-fill" style="width:10%;background:#2a9d4a"></div></div></td>
             </tr>
             <tr>
-              <td class="col-name">沪深300</td>
-              <td class="col-close">4,739.23</td>
-              <td class="red">+3.06%</td><td class="green">-4.82%</td><td class="red">+2.36%</td>
-              <td class="divider col-vol">10,167</td>
+              <td>沪深300</td><td>345.40</td>
               <td class="red">+3.69%</td><td class="red">+21.94%</td><td class="red">+12.82%</td>
+              <td><div class="vol-bar" style="width:100%"><div class="vol-bar-fill" style="width:41%;background:#d35400"></div></div></td>
             </tr>
             <tr>
-              <td class="col-name">中证500</td>
-              <td class="col-close">7,800.61</td>
-              <td class="red">+5.25%</td><td class="green">-13.63%</td><td class="red">+4.49%</td>
-              <td class="divider col-vol">6,070</td>
+              <td>中证500</td><td>268.38</td>
               <td class="red">+5.76%</td><td class="red">+24.34%</td><td class="red">+19.64%</td>
+              <td><div class="vol-bar" style="width:100%"><div class="vol-bar-fill" style="width:32%;background:#d35400"></div></div></td>
             </tr>
             <tr>
-              <td class="col-name">中证1000</td>
-              <td class="col-close">7,259.86</td>
-              <td class="red">+4.23%</td><td class="green">-17.59%</td><td class="green">-4.42%</td>
-              <td class="divider col-vol">5,729</td>
+              <td>中证1000</td><td>334.99</td>
               <td class="red">+8.70%</td><td class="red">+30.91%</td><td class="red">+20.02%</td>
+              <td><div class="vol-bar" style="width:100%"><div class="vol-bar-fill" style="width:40%;background:#d35400"></div></div></td>
             </tr>
             <tr>
-              <td class="col-name">国证2000</td>
-              <td class="col-close">9,305.66</td>
-              <td class="red">+3.59%</td><td class="green">-17.91%</td><td class="green">-6.53%</td>
-              <td class="divider col-vol">7,466</td>
+              <td>国证2000</td><td>482.61</td>
               <td class="red">+7.87%</td><td class="red">+31.36%</td><td class="red">+17.02%</td>
+              <td><div class="vol-bar" style="width:100%"><div class="vol-bar-fill" style="width:58%;background:#d35400"></div></div></td>
             </tr>
           </tbody>
         </table>
