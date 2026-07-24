@@ -464,45 +464,6 @@
       .event-item { padding: 12px 14px; }
       .event-item .event-title { font-size: 13px; }
     }
-
-    /* 密码门 */
-    #auth-gate {
-      position: fixed; inset: 0;
-      background: linear-gradient(135deg, #f5f2ed 0%, #ede4d3 100%);
-      display: flex; align-items: center; justify-content: center;
-      z-index: 9999;
-    }
-    #auth-gate .auth-card {
-      background: #fff;
-      border: 1px solid #e8e2d6;
-      border-radius: 14px;
-      padding: 32px 36px;
-      width: 340px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-    #auth-gate h2 { font-size: 20px; color: #1a1a2e; margin-bottom: 6px; letter-spacing: 1px; }
-    #auth-gate p { font-size: 12.5px; color: #888; margin-bottom: 18px; }
-    #auth-gate input {
-      width: 100%; padding: 12px 14px;
-      border: 1px solid #ddd; border-radius: 8px;
-      font-size: 14px; margin-bottom: 12px;
-      text-align: center; letter-spacing: 2px;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    #auth-gate input:focus { outline: none; border-color: #d35400; box-shadow: 0 0 0 3px rgba(211, 84, 0, 0.1); }
-    #auth-gate button {
-      width: 100%; padding: 12px;
-      background: linear-gradient(135deg, #d35400 0%, #b8541a 100%);
-      color: #fff; border: none; border-radius: 8px;
-      font-size: 14px; font-weight: 600; cursor: pointer;
-      letter-spacing: 1px;
-      box-shadow: 0 3px 8px rgba(211, 84, 0, 0.3);
-    }
-    #auth-gate button:hover { background: #b8541a; }
-    #auth-gate .auth-error { color: #d44; font-size: 12px; margin-top: 10px; min-height: 16px; }
-    body.authed #auth-gate { display: none; }
-    body:not(.authed) .container { display: none; }
     /* ETF份额变动表 */
     .etf-table .subtotal-row td {
       background: #fdf6ec;
@@ -523,86 +484,7 @@
   </style>
 </head>
 <body>
-  <!-- 密码门：未通过鉴权时遮挡页面 -->
-  <div id="auth-gate">
-    <div class="auth-card">
-      <h2>📊 全球市场晨报</h2>
-      <p>请输入访问密码</p>
-      <input type="password" id="auth-pwd" placeholder="密码" autocomplete="current-password">
-      <button id="auth-btn">查看晨报</button>
-      <div class="auth-error" id="auth-err"></div>
-    </div>
   </div>
-
-  <script>
-    (function() {
-      var PWD_HASH = 'b5e8e046555796c3a7e71f0d32ae33029f14888b8797e5d5b5d62ae730184fbb';
-      var SESSION_KEY = "mb_authed_at";
-
-      async function sha256(s) {
-        var buf = new TextEncoder().encode(s);
-        var hash = await crypto.subtle.digest("SHA-256", buf);
-        return Array.from(new Uint8Array(hash))
-          .map(function(b) { return b.toString(16).padStart(2, "0"); })
-          .join("");
-      }
-      function isAuthedToday() {
-        var v = sessionStorage.getItem(SESSION_KEY);
-        if (!v) return false;
-        return v === new Date().toISOString().slice(0, 10);
-      }
-      function markAuthed() {
-        sessionStorage.setItem(SESSION_KEY, new Date().toISOString().slice(0, 10));
-      }
-      function showContent() {
-        document.body.classList.add("authed");
-        buildWeekNav();
-      }
-      function buildWeekNav() {
-        var nav = document.getElementById("week-nav");
-        if (!nav) return;
-        var articles = document.querySelectorAll("article.daily-brief");
-        var links = [];
-        var seen = {};
-        articles.forEach(function(a, i) {
-          var dateEl = a.querySelector(".brief-header .date");
-          if (!dateEl) return;
-          var date = dateEl.textContent.trim();
-          if (seen[date]) return;
-          seen[date] = true;
-          var id = "brief-" + date;
-          a.id = id;
-          var isToday = (i === 0);
-          links.push("<a href=\"#" + id + "\"" + (isToday ? " class=\"today\"" : "") + ">" + date + (isToday ? " · 今日" : "") + "</a>");
-        });
-        nav.querySelector(".nav-links").innerHTML = links.join("") || "<span style=\"color:#888;\">暂无历史</span>";
-      }
-      async function tryAuth() {
-        var input = document.getElementById("auth-pwd").value;
-        var errEl = document.getElementById("auth-err");
-        errEl.textContent = "";
-        if (!input) { errEl.textContent = "请输入密码"; return; }
-        var hash = await sha256(input);
-        if (hash === PWD_HASH) {
-          markAuthed();
-          showContent();
-        } else {
-          errEl.textContent = "密码错误，请重试";
-          document.getElementById("auth-pwd").value = "";
-        }
-      }
-      document.addEventListener("DOMContentLoaded", function() {
-        if (isAuthedToday()) { showContent(); return; }
-        var btn = document.getElementById("auth-btn");
-        var input = document.getElementById("auth-pwd");
-        btn.addEventListener("click", tryAuth);
-        input.addEventListener("keydown", function(e) {
-          if (e.key === "Enter") tryAuth();
-        });
-        input.focus();
-      });
-    })();
-  </script>
 
   </div>
 
